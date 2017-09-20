@@ -1,13 +1,10 @@
 import React from 'react';
 
 class WherepothecaryPanel extends React.Component {
-    constructor(props){
-        super(props);
-
-        this.state = {
-            latApteki: '',
-            lonApteki: ''
-        }
+    handleSend(){
+        const price = this.myValue.value;
+        this.props.handleSend(price);
+        console.log(price);
     }
 
     //Obliczanie odleglosci
@@ -26,9 +23,14 @@ class WherepothecaryPanel extends React.Component {
     }
 
     
+
+    
     render() {
         const apteki = this.props.apteki;
         const fakePayload = this.props.fakePayload;
+        const drugs = this.props.drugs;
+
+        console.log({drugs})
 
         console.log('Lista aptek', { apteki });
 
@@ -38,12 +40,14 @@ class WherepothecaryPanel extends React.Component {
         console.log('Lista payloadow', { fakePayload })
         console.log('Losowe id payloadu', rngPayloadId)
 
+        let aptekaLat = '';
+        let aptekaLon = '';
+
         const listaAptek = apteki.map(apteka => {
             if (apteka.id === rngAptekaId) {
-                // this.setState({
-                //     latApteki: apteka.lat,
-                //     lonApteki: apteka.lon
-                // })
+                aptekaLat = apteka.lat;
+                aptekaLon = apteka.lon;
+                console.log(aptekaLat);
                 return (
                     <li key={apteka.name} >{apteka.name} mieszcząca się na ulicy {apteka.address}</li>
                 )
@@ -56,14 +60,12 @@ class WherepothecaryPanel extends React.Component {
                 //Na kazdy lek twordze oddzielna komorke
                 return payload.drugsId.map(id => {
                     return <tr>
-                        <td>Drug ID: {id}</td>
-                        <td>lat: {payload.lat}</td>
-                        <td>lon: {payload.lon} </td>
-                        <td><input type="number" name="price" /></td>
+                        <td> {id}</td>
+                        <td>{drugs[id].name}</td>
+                        <td><input ref={(value) => {this.myValue = value}} onChange={this.handleSend.bind(this)} type="number" name="price" /></td>
                         <td><button>Send</button></td>
                         <td><button>X</button></td>
-                        <td>{this.calculateDistance(payload.lat,payload.lon,6,51).toFixed(1)} km </td>
-                        {/* payload.lat, payload.lon, this.apteka.lat, this.apteka.lon */}
+                        <td>{this.calculateDistance(payload.lat,payload.lon,aptekaLat,aptekaLon).toFixed(1)} km </td>
                     </tr>
                 })
             }
@@ -82,9 +84,8 @@ class WherepothecaryPanel extends React.Component {
                     <tbody>
                         <tr>
                             <td>ID Leku</td>
-                            <td>Latitude</td>
-                            <td>Longitude </td>
-                            <td>Cena</td>
+                            <td>Nazwa</td>
+                            <td>Cena (zł)</td>
                             <td>Wyślij</td>
                             <td>Usuń</td>
                             <td>Odleglosc</td>
