@@ -1,7 +1,7 @@
 export default [
     {
         payloadId: 0,
-        drugsId:[0, 29],
+        drugsId:[0, 29, 13],
         lat: 51.760549449821696,
         lon: 19.403501300000016
     },
@@ -19,7 +19,7 @@ export default [
     },
     {
         payloadId: 3,
-        drugsId:[3, 9],
+        drugsId:[3, 9, 7, 13],
         lat: 53.760549449821696,
         lon: 16.403501300000016
     }

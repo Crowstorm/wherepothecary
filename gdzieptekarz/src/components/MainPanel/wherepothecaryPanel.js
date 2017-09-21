@@ -1,12 +1,45 @@
 import React from 'react';
+import Price from './PanelComponents/price'
+import {createStore, combineReducers} from 'redux';
 
 class WherepothecaryPanel extends React.Component {
-    handleSend(){
-        const price = this.myValue.value;
-        this.props.handleSend(price);
-        console.log(price);
+    constructor(props){
+        super(props);
+        this.state = {
+          renderedDrugs: [
+              {
+                id: '',
+                drugId: '',
+                price: ''
+              }
+          ]
+        }
+
+        //RENDERED DRUGS REDUCER
+        const renderedDrugsReducerDefState = []
+
+        const renderedDrugsReducer = (state = renderedDrugsReducerDefState, action) => {
+            switch(action.type){
+                default:
+                    return state;
+            }
+        }
+
+
+        //STORE CREATION
+        const store = createStore(
+            combineReducers({
+                renderedDrugs: renderedDrugsReducer
+            })
+        )
+
+        store.subscribe( () => {
+            console.log(store.getState());
+        })
     }
 
+
+    
     //Obliczanie odleglosci
     calculateDistance(latU, lonU, latA, lonA) {
         var R = 6371; // Radius of the earth in km
@@ -22,9 +55,6 @@ class WherepothecaryPanel extends React.Component {
         return d;
     }
 
-    
-
-    
     render() {
         const apteki = this.props.apteki;
         const fakePayload = this.props.fakePayload;
@@ -59,11 +89,12 @@ class WherepothecaryPanel extends React.Component {
             if (payload.payloadId === rngPayloadId) {
                 //Na kazdy lek twordze oddzielna komorke
                 return payload.drugsId.map(id => {
+                    //ustaw jakos state
                     return <tr>
                         <td> {id}</td>
                         <td>{drugs[id].name}</td>
-                        <td><input ref={(value) => {this.myValue = value}} onChange={this.handleSend.bind(this)} type="number" name="price" /></td>
-                        <td><button>Send</button></td>
+                        <td>{<Price />}</td>
+                        <td><button >Send</button></td>
                         <td><button>X</button></td>
                         <td>{this.calculateDistance(payload.lat,payload.lon,aptekaLat,aptekaLon).toFixed(1)} km </td>
                     </tr>

@@ -13,25 +13,13 @@ import SignUp from './components/signUp';
 import ForgottenPassword from './components/forgottenPassword';
 import Register from './components/register';
 
-import WherepothecaryPanel from './components/wherepothecaryPanel'
+import WherepothecaryPanel from './components/MainPanel/wherepothecaryPanel'
+import Price from './components/MainPanel/PanelComponents/price'
 
 import NotFound from './components/404';
 
 class App extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      cena: ''
-    }
-  }
 
-  handleSend(price){
-    this.setState({
-      cena: price
-    })
-
-  }
-  
 
   render() {
     return (
@@ -42,7 +30,7 @@ class App extends Component {
            <Route path='/signup' component={SignUp} exact={true}/>
            <Route path='/forgottenPassword' component={ForgottenPassword} exact={true}/>
            <Route path='/register' component={Register} exact={true}/>
-            <Route path='/panel' exact={true} render={(props) => ( <WherepothecaryPanel drugs={drugs} apteki={apteki} fakePayload={fakePayload} handleSend={this.handleSend.bind(this)} {...props}/> )}/> {/* WHY DOU */}
+            <Route path='/panel' exact={true} render={(props) => ( <WherepothecaryPanel drugs={drugs} apteki={apteki} fakePayload={fakePayload}  {...props}/> )}/> {/* WHY DOU */}
            <Route component={NotFound}/>
          </Switch>
         </BrowserRouter>
