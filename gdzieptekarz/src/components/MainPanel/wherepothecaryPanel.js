@@ -1,25 +1,52 @@
 import React from 'react';
-import Price from './PanelComponents/price'
-import {createStore, combineReducers} from 'redux';
+//import Price from './PanelComponents/price'
+import { createStore, combineReducers } from 'redux';
 
 class WherepothecaryPanel extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-          renderedDrugs: [
-              {
-                id: '',
-                drugId: '',
-                price: ''
-              }
-          ]
+            renderedDrugs: [
+                {
+                    id: '',
+                    drugId: '',
+                    price: undefined
+                }
+            ],
+            apteka: {
+            latA: '',
+            lonA:''
+            }
         }
 
         //RENDERED DRUGS REDUCER
         const renderedDrugsReducerDefState = []
 
         const renderedDrugsReducer = (state = renderedDrugsReducerDefState, action) => {
-            switch(action.type){
+            switch (action.type) {
+                default:
+                    return state;
+            }
+        }
+
+
+        //SET_LAT
+        const setLat = (latA) => ({
+            type: 'SET_LAT',
+            latA
+        })
+
+        //APTEKA REDUER
+
+        const aptekaReducerDefState = [];
+
+        const aptekaReducer = (state = aptekaReducerDefState, action) => {
+            switch (action.type) {
+                case 'SET_LAT':
+                    return {
+                        ...state,
+                        latA: action.latA
+                    }
                 default:
                     return state;
             }
@@ -33,13 +60,13 @@ class WherepothecaryPanel extends React.Component {
             })
         )
 
-        store.subscribe( () => {
+        store.subscribe(() => {
             console.log(store.getState());
         })
     }
 
 
-    
+
     //Obliczanie odleglosci
     calculateDistance(latU, lonU, latA, lonA) {
         var R = 6371; // Radius of the earth in km
@@ -55,12 +82,23 @@ class WherepothecaryPanel extends React.Component {
         return d;
     }
 
+    handlePriceChange(e) {
+        // this.setState({
+        //     price: e.target.value
+        // })
+        console.log(e.target.value)
+        console.log('stejt', this.state.renderedDrugs)
+    }
+
     render() {
+
+
+
         const apteki = this.props.apteki;
         const fakePayload = this.props.fakePayload;
         const drugs = this.props.drugs;
 
-        console.log({drugs})
+        console.log({ drugs })
 
         console.log('Lista aptek', { apteki });
 
@@ -77,7 +115,8 @@ class WherepothecaryPanel extends React.Component {
             if (apteka.id === rngAptekaId) {
                 aptekaLat = apteka.lat;
                 aptekaLon = apteka.lon;
-                console.log(aptekaLat);
+                // store.dispatch(setLat(aptekaLat));
+                // console.log(aptekaLat);
                 return (
                     <li key={apteka.name} >{apteka.name} mieszcząca się na ulicy {apteka.address}</li>
                 )
@@ -93,10 +132,10 @@ class WherepothecaryPanel extends React.Component {
                     return <tr>
                         <td> {id}</td>
                         <td>{drugs[id].name}</td>
-                        <td>{<Price />}</td>
+                        <td><input value={this.state.price} onChange={this.handlePriceChange.bind(this)} type="number" name="price" /></td>
                         <td><button >Send</button></td>
                         <td><button>X</button></td>
-                        <td>{this.calculateDistance(payload.lat,payload.lon,aptekaLat,aptekaLon).toFixed(1)} km </td>
+                        <td>{this.calculateDistance(payload.lat, payload.lon, aptekaLat, aptekaLon).toFixed(1)} km </td>
                     </tr>
                 })
             }

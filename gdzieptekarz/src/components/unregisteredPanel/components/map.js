@@ -1,5 +1,8 @@
 
 import React from 'react';
+import GoogleMapsLoader from 'google-maps';
+GoogleMapsLoader.KEY = 'AIzaSyBHek4tQK4jSQhVSoxw4s4c8tz_1z3xuNI';
+
 
 
 
@@ -23,13 +26,12 @@ class GoogleMap extends React.Component {
   }
 
   componentDidMount() {
-    var map, infoWindow;
 
-    map = new window.google.maps.Map(document.getElementById('map'), {
-      center: { lat: -34.397, lng: 150.644 },
-      zoom: 15
-    });
-
+    GoogleMapsLoader.load((google) => {
+      var map = new google.maps.Map(document.getElementById('map'), {
+       center: { lat: -34.397, lng: 150.644 },
+       zoom: 15
+      })
 
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
@@ -90,7 +92,7 @@ class GoogleMap extends React.Component {
     console.log('DID MOUNT');
     console.log(this);
     console.log(this.state);
-  }
+  })}
 
   handleLocationError(browserHasGeolocation, pos, map) {}
 
