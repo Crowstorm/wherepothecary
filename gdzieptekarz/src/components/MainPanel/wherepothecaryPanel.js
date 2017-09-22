@@ -25,56 +25,40 @@ class WherepothecaryPanel extends React.Component {
         //SET_ID
         const setId = (id, drugId) => ({
             type: 'SET_ID',
-
-            id,
-            drugId
-
+            renderedDrugs: {
+                id,
+                drugId
+            }
         })
 
         //SET_PRICE
-        const setPrice = (item) => ({
+        const setPrice = (drugId, price) => ({
             type: 'SET_PRICE',
-            item: item
-
+            drugId,
+            price
         })
 
         //RENDERED DRUGS REDUCER
         // const renderedDrugsReducerDefState = {id: null, drugId: null, price: null}
 
-        const renderedDrugsReducerDefState = {
-            items: [
-                { id: '111111', price: null },
-                { id: '222222', price: null },
-                { id: '333333', price: null },
-                { id: '444444', price: null },
-                { id: '555555', price: null },
-            ]
-        }
+        const renderedDrugsReducerDefState = [];
 
         const renderedDrugsReducer = (state = renderedDrugsReducerDefState, action) => {
             switch (action.type) {
+                case 'SET_ID':
+                    return [
+                    ...state,
+                    action.renderedDrugs
+                    ]
                 case 'SET_PRICE':
-                    return Object.assign({}, state, {
-                        items: []
-                    });
-                // case 'SET_ID':
-                //     return Object.assign({}, state, {
-                //         id: action.id,
-                //         drugId: action.drugId
-                //     });
-                // [
-                //     ...state,
-                //     action.renderedDrugs
-                // ]
-                // case 'SET_PRICE':
-                //     return state.map((drug) => {
-                //         if (drug.drugId === action.drugId) {
-                //             return {
-                //                 ...drug,
-                //                 ...action.price
-                //             }
-                //         }
-                //     })
+                    return state.map((drug) => {
+                        if (drug.drugId === action.drugId) {
+                            return {
+                                ...drug,
+                                ...action.price
+                            }
+                        }
+                    })
                 default:
                     return state;
             }
@@ -94,21 +78,20 @@ class WherepothecaryPanel extends React.Component {
 
         //APTEKA REDUER
 
-        const aptekaReducerDefState = {
-            latA: null,
-            lonA: null
-        }
+        const aptekaReducerDefState = []
 
         const aptekaReducer = (state = aptekaReducerDefState, action) => {
             switch (action.type) {
                 case 'SET_LAT':
-                    return Object.assign({}, state, {
+                    return {
+                        ...state,
                         latA: action.latA
-                    });
+                    }
                 case 'SET_LON':
-                    return Object.assign({}, state, {
+                    return {
+                        ...state,
                         lonA: action.lonA
-                    });
+                    }
                 default:
                     return state;
             }
@@ -137,7 +120,7 @@ class WherepothecaryPanel extends React.Component {
             //     price: e.target.value
             // })
             console.log(e.target.value)
-            console.log('stejt', this.state.renderedDrugs)
+            // console.log('stejt', this.state.renderedDrugs)
         }
 
         const apteki = this.props.apteki;
@@ -157,14 +140,14 @@ class WherepothecaryPanel extends React.Component {
         let aptekaLat = '';
         let aptekaLon = '';
 
-        const listaAptek = apteki.map(apteka, index => {
+        const listaAptek = apteki.map(apteka => {
             if (apteka.id === rngAptekaId) {
                 aptekaLat = apteka.lat;
                 aptekaLon = apteka.lon;
                 // store.dispatch(setLat(aptekaLat));
                 // console.log(aptekaLat);
                 return (
-                    <li key={'apateki-' + index} >{apteka.name} mieszcząca się na ulicy {apteka.address}</li>
+                    <li key={apteka.name} >{apteka.name} mieszcząca się na ulicy {apteka.address}</li>
                 )
             }
         })
@@ -203,13 +186,10 @@ class WherepothecaryPanel extends React.Component {
         store.dispatch(setLat(88));
         store.dispatch(setLon(78));
 
-        // store.dispatch(setId(uuid(), 3));
-        // store.dispatch(setId(uuid(), 35));
+        store.dispatch(setId(uuid(), 3));
+        store.dispatch(setId(uuid(), 35));
 
-
-
-        console.log(store.getState());
-        store.dispatch(setPrice(item));
+        store.dispatch(setPrice(35, {price: 400}));
 
         // console.log('Obecny state', store.getState())
 
