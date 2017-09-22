@@ -58,6 +58,7 @@ class WherepothecaryPanel extends React.Component {
                                 ...action.price
                             }
                         }
+                        return drug; //musisz zwrocic niezmodyfikowane
                     })
                 default:
                     return state;
@@ -190,6 +191,7 @@ class WherepothecaryPanel extends React.Component {
         store.dispatch(setId(uuid(), 35));
 
         store.dispatch(setPrice(35, {price: 400}));
+        store.dispatch(setPrice(3, {price: 4700}));
 
         // console.log('Obecny state', store.getState())
 
