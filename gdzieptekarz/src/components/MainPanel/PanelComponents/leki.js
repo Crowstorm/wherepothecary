@@ -8,11 +8,8 @@ class Leki extends React.Component {
     render() {
         const fakePayload = this.props.fakePayload;
         const drugs = this.props.drugs;
-        const renderedDrugs = this.props.renderedDrugs
 
         const rngPayloadId = Math.floor(Math.random() * 4);
-
-        console.log(fakePayload)
 
         const payload = fakePayload.map(payload => {
             //dopasowanie losowego id
@@ -38,16 +35,6 @@ class Leki extends React.Component {
         )
     }
 }
-
-// const Leki = (props) => (
-// //     const fakePayload = this.props.fakePayload;
-// // const drugs = this.props.drugs;
-// <div>
-//     <h1>Tu beda leki</h1>
-//     {props.renderedDrugs.length}, ,
-//         {props.renderedDrugs[0].id}
-// </div>
-// )
 
 const mapStateToProps = (state) => {
     return {

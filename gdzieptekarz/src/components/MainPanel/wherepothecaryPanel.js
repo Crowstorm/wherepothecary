@@ -2,6 +2,7 @@ import React from 'react';
 //import Price from './PanelComponents/price'
 import { createStore, combineReducers } from 'redux';
 import Leki from './PanelComponents/leki'
+import AptekaRNG from './PanelComponents/aptekaRNG'
 import {Provider}  from 'react-redux';
 
 import uuid from 'uuid'
@@ -13,19 +14,19 @@ class WherepothecaryPanel extends React.Component {
 
     render() {
 
-        const demoState = {
-            renderedDrugs: [
-                {
-                    id: '',
-                    drugId: '',
-                    price: undefined
-                }
-            ],
-            apteka: {
-                latA: '',
-                lonA: ''
-            }
-        }
+        // const demoState = {
+        //     renderedDrugs: [
+        //         {
+        //             id: '',
+        //             drugId: '',
+        //             price: undefined
+        //         }
+        //     ],
+        //     apteka: {
+        //         latA: '',
+        //         lonA: ''
+        //     }
+        // }
 
 
         //Obliczanie odleglosci
@@ -60,7 +61,7 @@ class WherepothecaryPanel extends React.Component {
         // console.log('Lista aptek', { apteki });
 
         const rngAptekaId = Math.floor(Math.random() * 5);
-        const rngPayloadId = Math.floor(Math.random() * 4);
+ 
 
         // console.log('Lista payloadow', { fakePayload })
         // console.log('Losowe id payloadu', rngPayloadId)
@@ -79,25 +80,6 @@ class WherepothecaryPanel extends React.Component {
                 )
             }
         })
-
-        // const payload = fakePayload.map(payload => {
-        //     //dopasowanie losowego id
-        //     if (payload.payloadId === rngPayloadId) {
-        //         //Na kazdy lek twordze oddzielna komorke
-        //         return payload.drugsId.map(id => {
-        //             //ustaw jakos state
-        //             return <tr>
-        //                 <td> {id}</td>
-        //                 <td>{drugs[id].name}</td>
-        //                 <td><input value={undefined} onChange={this.handlePriceChange} type="number" name="price" /></td>
-        //                 <td><button >Send</button></td>
-        //                 <td><button>X</button></td>
-        //                 <td>{this.calculateDistance(payload.lat, payload.lon, aptekaLat, aptekaLon).toFixed(1)} km </td>
-        //             </tr>
-        //         })
-        //     }
-        // })
-
 
         //STORE CREATION
 
@@ -119,8 +101,8 @@ class WherepothecaryPanel extends React.Component {
                 <div id='tymczasowe' className='col-xs-4'>
                     <p>Wylosowana apteka: </p>
                     <ul>
-                        {listaAptek}
-                        
+                        {/* {listaAptek} */}
+                        <AptekaRNG apteki={apteki}/>
                     </ul>
                 </div>
 
