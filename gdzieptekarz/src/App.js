@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom'
+import {Provider}  from 'react-redux';
+
 import './index.css';
 import './App.css';
+
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import { Navbar, Jumbotron, Button } from 'react-bootstrap';
 
@@ -21,10 +25,10 @@ import Price from './components/MainPanel/PanelComponents/price'
 import NotFound from './components/404';
 
 class App extends Component {
-
-
   render() {
+    
     return (
+     // <Provider store={store}>
       <div className="App">
         <BrowserRouter>
          <Switch>
@@ -37,7 +41,9 @@ class App extends Component {
            <Route component={NotFound}/>
          </Switch>
         </BrowserRouter>
+      
       </div>
+     // </Provider>
     );
   }
 }

@@ -5,7 +5,7 @@ export default class NotFound extends React.Component{
         return(
             <div>
                 <p>Nothing to see here </p>
-                <img src='https://i.ytimg.com/vi/ICYzs55h6IQ/maxresdefault.jpg' />
+                <img alt='404' src='https://i.ytimg.com/vi/ICYzs55h6IQ/maxresdefault.jpg' />
                 <a href='/'>Go back </a>
                 </div>
             

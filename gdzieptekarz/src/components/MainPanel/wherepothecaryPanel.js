@@ -1,6 +1,8 @@
 import React from 'react';
 //import Price from './PanelComponents/price'
 import { createStore, combineReducers } from 'redux';
+import Leki from './PanelComponents/leki'
+import {Provider}  from 'react-redux';
 
 import uuid from 'uuid'
 
@@ -21,84 +23,6 @@ class WherepothecaryPanel extends React.Component {
                 lonA: ''
             }
         }
-
-        //SET_ID
-        const setId = (id, drugId) => ({
-            type: 'SET_ID',
-            renderedDrugs: {
-                id,
-                drugId
-            }
-        })
-
-        //SET_PRICE
-        const setPrice = (drugId, price) => ({
-            type: 'SET_PRICE',
-            drugId,
-            price
-        })
-
-        //RENDERED DRUGS REDUCER
-        // const renderedDrugsReducerDefState = {id: null, drugId: null, price: null}
-
-        const renderedDrugsReducerDefState = [];
-
-        const renderedDrugsReducer = (state = renderedDrugsReducerDefState, action) => {
-            switch (action.type) {
-                case 'SET_ID':
-                    return [
-                    ...state,
-                    action.renderedDrugs
-                    ]
-                case 'SET_PRICE':
-                    return state.map((drug) => {
-                        if (drug.drugId === action.drugId) {
-                            return {
-                                ...drug,
-                                ...action.price
-                            }
-                        }
-                        return drug; //musisz zwrocic niezmodyfikowane
-                    })
-                default:
-                    return state;
-            }
-        }
-
-
-        //SET_LAT
-        const setLat = (latA) => ({
-            type: 'SET_LAT',
-            latA
-        })
-        //SET_LON
-        const setLon = (lonA) => ({
-            type: 'SET_LON',
-            lonA
-        })
-
-        //APTEKA REDUER
-
-        const aptekaReducerDefState = []
-
-        const aptekaReducer = (state = aptekaReducerDefState, action) => {
-            switch (action.type) {
-                case 'SET_LAT':
-                    return {
-                        ...state,
-                        latA: action.latA
-                    }
-                case 'SET_LON':
-                    return {
-                        ...state,
-                        lonA: action.lonA
-                    }
-                default:
-                    return state;
-            }
-        }
-
-
 
 
         //Obliczanie odleglosci
@@ -173,27 +97,19 @@ class WherepothecaryPanel extends React.Component {
 
 
         //STORE CREATION
-        const store = createStore(
-            combineReducers({
-                renderedDrugs: renderedDrugsReducer,
-                apteka: aptekaReducer
-            })
-        )
 
-        store.subscribe(() => {
-            console.log('podaje store', store.getState());
-        })
+        // store.subscribe(() => {
+        //     console.log('podaje store', store.getState());
+        // })
 
-        store.dispatch(setLat(88));
-        store.dispatch(setLon(78));
+        // store.dispatch(setLat(88));
+        // store.dispatch(setLon(78));
 
-        store.dispatch(setId(uuid(), 3));
-        store.dispatch(setId(uuid(), 35));
+        // store.dispatch(setId(uuid(), 3));
+        // store.dispatch(setId(uuid(), 35));
 
-        store.dispatch(setPrice(35, {price: 400}));
-        store.dispatch(setPrice(3, {price: 4700}));
-
-        // console.log('Obecny state', store.getState())
+        // store.dispatch(setPrice(35, {price: 400}));
+        // store.dispatch(setPrice(3, {price: 4700}));
 
         return (
             <div>
@@ -201,10 +117,13 @@ class WherepothecaryPanel extends React.Component {
                     <p>Wylosowana apteka: </p>
                     <ul>
                         {listaAptek}
+                        
                     </ul>
                 </div>
 
-                <table id='wherepothecaryPanel' className='col-xs-8'>
+                <div className='col-xs-8'>
+                    <Leki />
+                <table id='wherepothecaryPanel' >
                     <tbody>
                         <tr>
                             <td>ID Leku</td>
@@ -217,6 +136,8 @@ class WherepothecaryPanel extends React.Component {
                         {/* {payload} */}
                     </tbody>
                 </table>
+                </div>
+
             </div>
         )
     }
