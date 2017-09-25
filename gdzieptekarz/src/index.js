@@ -21,7 +21,12 @@ store.dispatch(setLon(30));
 
 store.dispatch(setId(1, 45));
 console.log(store.getState())
-store.dispatch(setId(3, 455));
+
+setTimeout(() =>{
+    store.dispatch(setId(3, 455));
+}
+, 3000)
+
 store.dispatch(setPrice(45, {price: 370}));
 
 console.log(store.getState())

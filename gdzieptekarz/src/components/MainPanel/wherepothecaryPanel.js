@@ -6,6 +6,9 @@ import {Provider}  from 'react-redux';
 
 import uuid from 'uuid'
 
+import fakePayload from '../../components/fakePayload/fakePayload'
+import drugs from '../../components/data/drugs'
+
 class WherepothecaryPanel extends React.Component {
 
     render() {
@@ -122,7 +125,7 @@ class WherepothecaryPanel extends React.Component {
                 </div>
 
                 <div className='col-xs-8'>
-                    <Leki />
+                    
                 <table id='wherepothecaryPanel' >
                     <tbody>
                         <tr>
@@ -133,8 +136,9 @@ class WherepothecaryPanel extends React.Component {
                             <td>Usuń</td>
                             <td>Odleglosc</td>
                         </tr>
-                        {/* {payload} */}
+                        
                     </tbody>
+                    <Leki drugs={drugs} fakePayload={fakePayload}/>
                 </table>
                 </div>
 
