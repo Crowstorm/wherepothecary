@@ -1,8 +1,12 @@
+import React from 'react'
+
 //APTEKA REDUER
 
 const aptekaReducerDefState = {
     latA: undefined,
-    lonA: undefined
+    lonA: undefined,
+    name: undefined,
+    address: undefined
 }
 
 const aptekaReducer = (state = aptekaReducerDefState, action) => {
@@ -17,6 +21,16 @@ const aptekaReducer = (state = aptekaReducerDefState, action) => {
                 ...state,
                 lonA: action.lonA
             }
+        case 'SET_NAME':
+            return  {
+                ...state,
+                name: action.name,
+                address: action.address
+            }
+                 
+
+                
+            
         default:
             return state;
     }

@@ -7,7 +7,7 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-import {setLat, setLon} from './actions/apteka'
+import {setLat, setLon, setLatLon} from './actions/apteka'
 import {setId, setPrice} from './actions/leki'
 
 import configureStore from './store/configureStore' //STORE
@@ -23,11 +23,13 @@ store.dispatch(setId(1, 45));
 console.log(store.getState())
 
 setTimeout(() =>{
-    store.dispatch(setId(3, 455));
+    console.log(store.getState())
 }
-, 3000)
+, 6000)
 
 store.dispatch(setPrice(45, {price: 370}));
+
+
 
 console.log(store.getState())
 

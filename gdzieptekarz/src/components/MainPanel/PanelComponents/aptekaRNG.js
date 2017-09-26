@@ -1,36 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import {setLat, setLon} from '../../../actions/apteka'
+import { setLat, setLon, setName } from '../../../actions/apteka'
+import configureStore from '../../../store/configureStore'
 
-class AptekaRNG extends React.Component{
-    constructor(props){
+class AptekaRNG extends React.Component {
+    constructor(props) {
         super(props)
+        this.props.dispatch(setLat(this.props.apteki[0].lat));
+        this.props.dispatch(setLon(this.props.apteki[0].lon));
+        this.props.dispatch(setName(this.props.apteki[0].name, this.props.apteki[0].address ));
     }
-    render(){
-        const apteki = this.props.apteki;
+    render() {
         
-        const rngAptekaId = Math.floor(Math.random() * 5);
-
-        const listaAptek = apteki.map(apteka => {
-            if (apteka.id === rngAptekaId) {
-                // aptekaLat = apteka.lat;
-                // aptekaLon = apteka.lon;
-                this.props.dispatch(setLat(apteka.lat));
-                this.props.dispatch(setLon(apteka.lon));
-                // console.log(this.props.getState());
-                return (
-                    <li key={apteka.name} >{apteka.name} mieszcząca się na ulicy {apteka.address}</li>
-                )
-            }
-        })
-        return(
-            <div>{listaAptek}</div>
+        return (
+             <div key={this.props.apteki[0].name} >{this.props.apteki[0].name} mieszcząca się na ulicy {this.props.apteki[0].address}</div>        
         )
     }
 }
 
-const mapStateToProps = (state) =>{
-    return{
+const mapStateToProps = (state) => {
+    return {
         apteka: state.apteka
     }
 }
