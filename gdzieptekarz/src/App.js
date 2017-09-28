@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
-import {Provider}  from 'react-redux';
+import { Provider } from 'react-redux';
 
 import './index.css';
 import './App.css';
 
-import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { Navbar, Jumbotron, Button } from 'react-bootstrap';
 
 import Gdziepteka from './components/unregisteredPanel/gdziepteka'
@@ -26,24 +26,24 @@ import NotFound from './components/404';
 
 class App extends Component {
   render() {
-    
+
     return (
-     // <Provider store={store}>
+      // <Provider store={store}>
       <div className="App">
         <BrowserRouter>
-         <Switch>
-           <Route path='/' component={MainPage} exact={true}/>
-           <Route path='/signup' component={SignUp} exact={true}/>
-           <Route path='/forgottenPassword' component={ForgottenPassword} exact={true}/>
-           <Route path='/register' component={Register} exact={true}/>
-           <Route path='/panel' exact={true} render={(props) => ( <WherepothecaryPanel drugs={drugs} apteki={apteki} fakePayload={fakePayload}  {...props}/> )}/> {/* WHY DOU */}
-           <Route path='/unregistered' exact={true} render={(props) => ( <Gdziepteka drugs={drugs} {...props}/> )}/>
-           <Route component={NotFound}/>
-         </Switch>
+          <Switch>
+            <Route path='/' component={MainPage} exact={true} />
+            <Route path='/signup' component={SignUp} exact={true} />
+            <Route path='/forgottenPassword' component={ForgottenPassword} exact={true} />
+            <Route path='/register' component={Register} exact={true} />
+            <Route path='/panel' exact={true} render={(props) => (<WherepothecaryPanel drugs={drugs} apteki={apteki} fakePayload={fakePayload} />)} /> {/* WHY DOU */}
+            <Route path='/unregistered' exact={true} render={(props) => (<Gdziepteka drugs={drugs} {...props} />)} />
+            <Route component={NotFound} />
+          </Switch>
         </BrowserRouter>
-      
+
       </div>
-     // </Provider>
+      // </Provider>
     );
   }
 }

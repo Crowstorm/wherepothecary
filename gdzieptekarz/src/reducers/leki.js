@@ -9,6 +9,7 @@ const renderedDrugsReducerDefState = {
 const renderedDrugsReducer = (state = renderedDrugsReducerDefState, action) => {
     switch (action.type) {
         case 'SET_ID':
+            // console.log('set-id', action);
             return [
                 ...state,
                 action.renderedDrugs

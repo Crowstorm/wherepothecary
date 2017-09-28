@@ -49,7 +49,6 @@ class Gdziepteka extends Component {
     })
   }
 
-  //chuj kurwa nie dziala jak powinno popraw
   deleteDrug(id){
     //const {count} = this.state
     const {picked} = this.state;

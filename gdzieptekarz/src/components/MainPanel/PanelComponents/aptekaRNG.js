@@ -10,8 +10,9 @@ class AptekaRNG extends React.Component {
         this.props.dispatch(setLon(this.props.apteki[0].lon));
         this.props.dispatch(setName(this.props.apteki[0].name, this.props.apteki[0].address ));
     }
+
+    
     render() {
-        
         return (
              <div key={this.props.apteki[0].name} >{this.props.apteki[0].name} mieszcząca się na ulicy {this.props.apteki[0].address}</div>        
         )
