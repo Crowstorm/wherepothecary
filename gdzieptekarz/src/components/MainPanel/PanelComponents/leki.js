@@ -80,18 +80,24 @@ class Leki extends React.Component {
     //     return data = _.get(this.props, 'renderedDrugs[0].drugId');
     // }
 
-    getTest(){
-        // const demo = _.get(this.props, 'renderedDrugs')
-        // console.log('demo',demo)
-        // return demo
-        console.log(this.props.renderedDrugs.id)
-        // return this.props.renderedDrugs.id.map(rd => <div>elo</div>)
+    getTest() {
 
+        console.log(this.props.renderedDrugs.id)
         const l = this.props.renderedDrugs.length;
         const ary = [];
-    
-        for(var i = 0; i < l; i++){
-            ary.push(<div>{this.props.renderedDrugs[i].id}</div>);
+
+        for (var i = 0; i < l; i++) {
+            //ary.push(<div key={this.props.renderedDrugs[i].id}>{this.props.renderedDrugs[i].id}</div>);
+            ary.push(<tr>
+                <td>{this.props.renderedDrugs[i].id}</td>
+                <td>{this.props.renderedDrugs[i].name}</td>
+                <td><input value={undefined} type="number" name="price" /></td>
+                <td><button>Send</button></td>
+                <td><button>X</button></td>
+                <td>DÓRZO</td>
+                {/* <td>{this.calculateDistance(payload.lat, payload.lon, aptekaLat, aptekaLon).toFixed(1)} km </td> */}
+            </tr>
+            )
         }
         return ary;
     }
@@ -112,19 +118,19 @@ class Leki extends React.Component {
         //         return  <div> pusto </div>
         //     }
         // }
-        
+
 
         const pls = (this.props.renderedDrugs) ? this.getTest() : nie()
 
-        function jest(){
+        function jest() {
             return 'jest'
         }
 
-        function nie(){
+        function nie() {
             return 'nie'
         }
         return (
-            <div>{pls}</div>
+            <tbody>{pls}</tbody>
         )
     }
 }

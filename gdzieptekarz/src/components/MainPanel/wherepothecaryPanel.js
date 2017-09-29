@@ -75,9 +75,9 @@ class WherepothecaryPanel extends React.Component {
                         </tr>
                         
                     </tbody>
-
+                    <Leki drugs={drugs} fakePayload={fakePayload}/>
                 </table>
-                <Leki drugs={drugs} fakePayload={fakePayload}/>
+                
 
                 </div>
 

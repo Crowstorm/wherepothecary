@@ -1,4 +1,4 @@
-
+import uuid from 'uuid';
 
 //SET_PRICE
 export const setPrice = (drugId, price) => ({
@@ -17,7 +17,7 @@ export const setPrice = (drugId, price) => ({
 // })
 
 export function setId(id, drugId) {
-    console.log('SETID dzialam')
+    //console.log('SETID dzialam')
     return {
         type: 'SET_ID',
         renderedDrugs: {
@@ -37,12 +37,15 @@ export function setId(id, drugId) {
 
 export function test(drugs, fakePayload) {
     const rngPayloadId = Math.floor(Math.random() * 4);
-    console.log('dziala')
+    //console.log('dziala')
     return (dispatch) => {
-        const payload = fakePayload.map(() => {
-            console.log('jestem w dispaczu')
-            // return payload.drugsId.map(id => { dispatch(setId(id, id)) })
-            dispatch(setId(3, 3))
+        const payload = fakePayload.map((payload) => {
+            //console.log('jestem w dispaczu')
+            if (payload.payloadId === rngPayloadId) {
+                //console.log('map')
+                return payload.drugsId.map(id => { dispatch(setId(uuid(), id)) })
+            }
+            //dispatch(setId(3, 3))
         })
     }
     // dispatch(setId(id, drugId))
