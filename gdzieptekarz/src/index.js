@@ -25,7 +25,7 @@ store.dispatch(setLon(30));
 setTimeout(() =>{
 console.log(store.getState())
 }
-, 3000)
+, 10000)
 
 // store.dispatch(setPrice(45, {price: 370}));
 

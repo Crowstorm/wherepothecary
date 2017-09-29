@@ -16,13 +16,15 @@ export const setPrice = (drugId, price) => ({
 //     }
 // })
 
-export function setId(id, drugId) {
+export function setId(id, drugId, lat, lon) {
     //console.log('SETID dzialam')
     return {
         type: 'SET_ID',
         renderedDrugs: {
             id,
-            drugId
+            drugId,
+            lat,
+            lon
         }
     }
 }
@@ -43,12 +45,21 @@ export function test(drugs, fakePayload) {
             //console.log('jestem w dispaczu')
             if (payload.payloadId === rngPayloadId) {
                 //console.log('map')
-                return payload.drugsId.map(id => { dispatch(setId(uuid(), id)) })
+                return payload.drugsId.map(id => { dispatch(setId(uuid(), id, payload.lat, payload.lon)) })
             }
             //dispatch(setId(3, 3))
         })
     }
     // dispatch(setId(id, drugId))
+}
+
+export function setPriceTest(id,val){
+    console.log(val)
+    return (dispatch) => {
+        console.log('dispatchuje')
+        
+        dispatch(setPrice(id, {price: val}))
+    }
 }
 
 

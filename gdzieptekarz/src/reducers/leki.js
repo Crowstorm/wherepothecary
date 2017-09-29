@@ -3,7 +3,9 @@
 const renderedDrugsReducerDefState = {
     id: undefined,
     drugId: undefined,
-    price: undefined,
+    lat: undefined,
+    lon: undefined,
+    price: 2,
 };
 
 const renderedDrugsReducer = (state = renderedDrugsReducerDefState, action) => {
@@ -16,7 +18,7 @@ const renderedDrugsReducer = (state = renderedDrugsReducerDefState, action) => {
             ]
         case 'SET_PRICE':
             return state.map((drug) => {
-                if (drug.drugId === action.drugId) {
+                if (drug.drugId == action.drugId) {
                     return {
                         ...drug,
                         ...action.price

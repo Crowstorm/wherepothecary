@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { setId, test } from '../../../actions/leki'
+import { setId, test, setPriceTest } from '../../../actions/leki'
+import Price from './price'
 //import configureStore from '../../../store/configureStore' //STORE
 import _ from 'lodash';
 import uuid from 'uuid';
@@ -49,57 +50,53 @@ class Leki extends React.Component {
         super(props);
 
     }
-
-    // addDrugId(id, ajdi) {
-    //     this.props.setId(id, ajdi)
-    // }
     componentWillMount() {
         const { fakePayload, drugs, getDrugs } = this.props;
-
-        //this.props.dispatch(test(1, 55));
-
-        //this.props.dispatch(setId(3, 56))
-
-        // setId(1, 55);
-
-        // console.log(this.props);
-        // const fakePayload = this.props.fakePayload;
-        // const drugs = this.props.drugs;
+        setPriceTest();
 
         this.props.dispatch(test(drugs, fakePayload))
-
-        // const rngPayloadId = Math.floor(Math.random() * 4);
-        // const payload = fakePayload.map(payload => {
-        //     if (payload.payloadId === rngPayloadId) {
-        //         return payload.drugsId.map(id => { this.props.dispatch(setId(uuid(), id)) })
-        //     }
-        // });
     }
 
     // getDrugs() {
     //     return data = _.get(this.props, 'renderedDrugs[0].drugId');
     // }
 
-    getTest() {
-
-        console.log(this.props.renderedDrugs.id)
+    getDrugs() {
         const l = this.props.renderedDrugs.length;
-        const ary = [];
+        const arrayOfDrugs = [];
+
+        const calculateDistance = (latU, lonU, latA, lonA) => {
+            var R = 6371; // Radius of the earth in km
+            var dLat = (latA - latU) * (Math.PI / 180);  // deg2rad below
+            var dLon = (lonA - lonU) * (Math.PI / 180);
+            var a =
+                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos((Math.PI / 180) * (latU)) * Math.cos((Math.PI / 180) * (latA)) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2)
+                ;
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            var d = R * c; // Distance in km
+            return d;
+        }
+
+        const firePriceChange = (e) =>{
+            console.log('target', e.target)
+            return this.props.dispatch(setPriceTest(e.target.name, e.target.value));
+        }
 
         for (var i = 0; i < l; i++) {
-            //ary.push(<div key={this.props.renderedDrugs[i].id}>{this.props.renderedDrugs[i].id}</div>);
-            ary.push(<tr>
+            arrayOfDrugs.push(<tr key={this.props.renderedDrugs[i].id}>
                 <td>{this.props.renderedDrugs[i].id}</td>
                 <td>{this.props.renderedDrugs[i].name}</td>
-                <td><input value={undefined} type="number" name="price" /></td>
+                <td><input value={this.props.renderedDrugs[i].price} onChange={firePriceChange} type="number" name={this.props.renderedDrugs[i].drugId} /></td>
+                {/* <td>{Price}</td> */}
                 <td><button>Send</button></td>
                 <td><button>X</button></td>
-                <td>DÓRZO</td>
-                {/* <td>{this.calculateDistance(payload.lat, payload.lon, aptekaLat, aptekaLon).toFixed(1)} km </td> */}
+                <td>{calculateDistance(this.props.renderedDrugs[i].lat, this.props.renderedDrugs[i].lon, this.props.apteka.latA, this.props.apteka.lonA).toFixed(1)} km </td>
             </tr>
             )
         }
-        return ary;
+        return arrayOfDrugs;
     }
 
     render() {
@@ -107,30 +104,14 @@ class Leki extends React.Component {
 
         console.log('wypisuje propsy', this.props.renderedDrugs)
 
-        //this.getTest()
-
         // const demo = this.props.renderedDrugs ? this.getTest() : null
+        const tableOfDrugsRender = (this.props.renderedDrugs) ? this.getDrugs() : notRendered()
 
-        // const srest = () => {
-        //     if(this.props.renderedDrugs){
-        //         return <div>jest</div>
-        //     } else {
-        //         return  <div> pusto </div>
-        //     }
-        // }
-
-
-        const pls = (this.props.renderedDrugs) ? this.getTest() : nie()
-
-        function jest() {
-            return 'jest'
-        }
-
-        function nie() {
-            return 'nie'
+        function notRendered() {
+            return 'Not rendered yet'
         }
         return (
-            <tbody>{pls}</tbody>
+            <tbody>{tableOfDrugsRender}</tbody>
         )
     }
 }
@@ -150,39 +131,6 @@ class Leki extends React.Component {
 //     }
 // }
 
-// class Leki extends React.Component {
-//      constructor(props) {
-//          super(props);
-//          const fakePayload = this.props.fakePayload;
-//          const drugs = this.props.drugs;
-
-//         const rngPayloadId = Math.floor(Math.random() * 4);
-//          const payload = fakePayload.map(payload => {
-//              //dopasowanie losowego id
-//              if (payload.payloadId === rngPayloadId) {
-//                  //Na kazdy lek twordze oddzielna komorke
-//                  return payload.drugsId.map(id => { props.dispatch(setId(uuid(), id)) })
-//              }
-//          })
-//      }
-
-//      // addDrugId(id, ajdi) {
-//      //     this.props.setId(id, ajdi)
-//      // }
-
-//      render() {
-//         if (this.props.hasErrored) {
-//             return <p>Sorry! There was an error loading the items</p>;
-//         }
-//         if (this.props.isLoading) {
-//             return <p>Loading…</p>;
-//         }
-//          return (
-
-//              <div>{this.props.renderedDrugs[1].drugId}</div>
-//          )
-//      }
-//  }
 // const mapDispatchToProps = (dispatch) => {
 //     return bindActionCreators({setId, test}, dispatch)
 // }
