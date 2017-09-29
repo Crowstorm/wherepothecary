@@ -1,49 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { setId, test, setPriceTest } from '../../../actions/leki'
+import { setId, test, setPriceTest, removeDrug, test2 } from '../../../actions/leki'
 import Price from './price'
 //import configureStore from '../../../store/configureStore' //STORE
 import _ from 'lodash';
 import uuid from 'uuid';
-
-
-// const Leki = (props) => {
-//         const addDrugId = (id, ajdi) => {
-//         props.dispatch(setId(id, ajdi))
-//     }
-//         const fakePayload = props.fakePayload;
-//         const drugs = props.drugs;
-
-//         test(5, 55);
-
-//         const rngPayloadId = Math.floor(Math.random() * 4);
-
-//         const payload = fakePayload.map(payload => {
-//             //dopasowanie losowego id
-//             if (payload.payloadId === rngPayloadId) {
-//                 //Na kazdy lek twordze oddzielna komorke
-//                 return payload.drugsId.map(id => {
-
-//                     return <tr>
-//                         {/* {props.dispatch(setId(uuid(), id))} */}
-//                         <td>{id}</td>
-//                         <td>{drugs[id].name}</td>
-//                         <td><input value={undefined} type="number" name="price" /></td>
-//                         <td><button onClick={() => addDrugId(uuid(), id)}>Send</button></td>
-//                         <td><button>X</button></td>
-//                         <td>DÓRZO</td>
-//                         {/* <td>{this.calculateDistance(payload.lat, payload.lon, aptekaLat, aptekaLon).toFixed(1)} km </td> */}
-//                     </tr>
-//                 })
-//             }
-//         })
-
-//         return(
-//             <tbody>{payload}</tbody>
-//         )
-// }
-
 
 class Leki extends React.Component {
     constructor(props) {
@@ -52,7 +14,7 @@ class Leki extends React.Component {
     }
     componentWillMount() {
         const { fakePayload, drugs, getDrugs } = this.props;
-        setPriceTest();
+       // setPriceTest();
 
         this.props.dispatch(test(drugs, fakePayload))
     }
@@ -80,8 +42,17 @@ class Leki extends React.Component {
         }
 
         const firePriceChange = (e) =>{
-            console.log('target', e.target)
+            // console.log('target', e.target)
             return this.props.dispatch(setPriceTest(e.target.name, e.target.value));
+        }
+
+        const handleSend = (e) => {
+            this.props.dispatch(test2(this.props.renderedDrugs[e.target.id].drugId))
+            // const {renderedDrugs} = this.props;
+            // console.log(renderedDrugs)
+            // var index = renderedDrugs.indexOf(e.target.id);
+            // console.log('index to',index);
+            console.log(e.target.id, 'Wysylam lek o id ',this.props.renderedDrugs[e.target.id].id, ' ktory koztuje ', this.props.renderedDrugs[e.target.id].price )
         }
 
         for (var i = 0; i < l; i++) {
@@ -89,8 +60,7 @@ class Leki extends React.Component {
                 <td>{this.props.renderedDrugs[i].id}</td>
                 <td>{this.props.renderedDrugs[i].name}</td>
                 <td><input value={this.props.renderedDrugs[i].price} onChange={firePriceChange} type="number" name={this.props.renderedDrugs[i].drugId} /></td>
-                {/* <td>{Price}</td> */}
-                <td><button>Send</button></td>
+                <td><button id={i} onClick={handleSend}>Send</button></td>
                 <td><button>X</button></td>
                 <td>{calculateDistance(this.props.renderedDrugs[i].lat, this.props.renderedDrugs[i].lon, this.props.apteka.latA, this.props.apteka.lonA).toFixed(1)} km </td>
             </tr>

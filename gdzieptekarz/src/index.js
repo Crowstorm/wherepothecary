@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import uuid from 'uuid'
 
 import { Provider } from 'react-redux'
 
@@ -29,7 +30,10 @@ console.log(store.getState())
 
 // store.dispatch(setPrice(45, {price: 370}));
 
-
+setInterval(() =>{
+    store.dispatch(setId(uuid(), uuid()));
+    }
+    , 3000)
 
 // console.log(store.getState())
 

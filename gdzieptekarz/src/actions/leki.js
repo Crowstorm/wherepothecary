@@ -16,6 +16,14 @@ export const setPrice = (drugId, price) => ({
 //     }
 // })
 
+export function removeDrug(drugId){
+    console.log('remove')
+    return {
+        type: 'REMOVE_DRUG',
+        drugId
+    }
+}
+
 export function setId(id, drugId, lat, lon) {
     //console.log('SETID dzialam')
     return {
@@ -29,13 +37,14 @@ export function setId(id, drugId, lat, lon) {
     }
 }
 
-// export function test(id, drugId){
-//     console.log('TEST dzialam')
-//     return (dispatch) => {
-//         console.log('jestem w dispaczu')
-//         dispatch(setId(id, drugId))
-//     }
-// }
+export function test2(drugId){
+    // console.log('test2')
+    // removeDrug()
+    console.log('id', drugId)
+    return(dispatch) => {
+        dispatch(removeDrug(drugId))
+    }
+}
 
 export function test(drugs, fakePayload) {
     const rngPayloadId = Math.floor(Math.random() * 4);
@@ -56,7 +65,7 @@ export function test(drugs, fakePayload) {
 export function setPriceTest(id,val){
     console.log(val)
     return (dispatch) => {
-        console.log('dispatchuje')
+//console.log('dispatchuje')
         
         dispatch(setPrice(id, {price: val}))
     }
