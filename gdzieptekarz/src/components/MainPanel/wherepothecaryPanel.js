@@ -1,11 +1,8 @@
 import React from 'react';
 //import Price from './PanelComponents/price'
-import { createStore, combineReducers } from 'redux';
+import { combineReducers } from 'redux';
 import Leki from './PanelComponents/leki'
 import AptekaRNG from './PanelComponents/aptekaRNG'
-import {Provider}  from 'react-redux';
-
-import uuid from 'uuid'
 
 import fakePayload from '../../components/fakePayload/fakePayload'
 import drugs from '../../components/data/drugs'

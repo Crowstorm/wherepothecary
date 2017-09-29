@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux';
+// import ReactDOM from 'react-dom'
+// import { Provider } from 'react-redux';
 
 import './index.css';
 import './App.css';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import { Navbar, Jumbotron, Button } from 'react-bootstrap';
+//import { Navbar, Jumbotron, Button } from 'react-bootstrap';
 
 import Gdziepteka from './components/unregisteredPanel/gdziepteka'
 
@@ -20,7 +20,7 @@ import ForgottenPassword from './components/forgottenPassword';
 import Register from './components/register';
 
 import WherepothecaryPanel from './components/MainPanel/wherepothecaryPanel'
-import Price from './components/MainPanel/PanelComponents/price'
+
 
 import NotFound from './components/404';
 

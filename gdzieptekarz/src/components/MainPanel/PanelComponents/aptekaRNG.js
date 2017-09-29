@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { setLat, setLon, setName } from '../../../actions/apteka'
-import configureStore from '../../../store/configureStore'
+
 
 class AptekaRNG extends React.Component {
     constructor(props) {

@@ -48,6 +48,7 @@ class Gdziepteka extends Component {
       picked: pickedDrugList
     })
   }
+  
 
   deleteDrug(id){
     //const {count} = this.state

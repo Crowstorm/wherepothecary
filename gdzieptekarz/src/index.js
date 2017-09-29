@@ -8,8 +8,8 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-import { setLat, setLon, setLatLon } from './actions/apteka'
-import { setId, setPrice } from './actions/leki'
+import { setLat, setLon } from './actions/apteka'
+import { setId } from './actions/leki'
 
 import configureStore from './store/configureStore' //STORE
 
@@ -33,7 +33,7 @@ console.log(store.getState())
 setInterval(() =>{
     store.dispatch(setId(uuid(), uuid()));
     }
-    , 3000)
+    , 7000)
 
 // console.log(store.getState())
 
