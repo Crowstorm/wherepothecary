@@ -16,7 +16,8 @@ class Gdziepteka extends Component {
     super(props);
     this.state = {
       filterText: '',
-      picked: [],
+      picked: [
+      ],
       lat: '',
       lon: '',
        //Current Lat: 51.799 Current Lng: 19.456  tymczasowe koordy pseudoapteki
@@ -40,10 +41,10 @@ class Gdziepteka extends Component {
     })
   }
 
-  addDrug(id){
+  addDrug(a, b, c, d, e){
     //const {picked} = this.state;
-    console.log('adding id', id);
-    const pickedDrugList = this.state.picked.concat([id]);
+    console.log('adding id', a);
+    const pickedDrugList = this.state.picked.concat([{a,b,c,d,e}]);
     this.setState({
       picked: pickedDrugList
     })

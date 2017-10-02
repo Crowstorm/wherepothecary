@@ -10,28 +10,17 @@ class DrugsList extends React.Component {
         const filterText = this.props.filterText;
         const addDrug = this.props.addDrug;
 
-       // const leki = require('json!../../data/leki.json')
-
-       console.log(leki[1].A)
-
-    //    const lekiList = leki.filter(leki => {
-    //        return leki.A.toLowerCase().indexOf(filterText.toLowerCase()) !== -1;
-    //    }).map(leki => {
-    //        return(
-    //         <li className="list-group-item" key={leki.A} >{leki.A}<button className='btn btn-sm btn-success btn-drug' onClick={() => addDrug(drugs.id)}>Select</button></li>
-    //        )
-    //    })
 
        const dataList = [];
        let skip = 0;
-       const max = 50;
+       const max = 20;
        const filterLowerCase = filterText.toLowerCase(); // Do this *once*
        leki.some(function(entry) {
            if (entry.A.toLowerCase().indexOf(filterLowerCase) !== -1) {
                if (skip > 0) {
                    --skip;
                } else {
-                   dataList.push(<li className="list-group-item" key={uuid()} >{entry.A}</li>);
+                   dataList.push(<li className="list-group-item" key={uuid()} >{entry.A} {entry.B} {entry.C}, {entry.D} {entry.E}<button className='btn btn-sm btn-success btn-drug' onClick={() => addDrug(entry.A, entry.B,entry.C,entry.D,entry.E)}>Select</button></li>);
                    if (dataList.length == max) {
                        return true; // Stop `some`, we have enough
                    }
@@ -40,16 +29,13 @@ class DrugsList extends React.Component {
            return false;
        });
 
-        // const drugsList = drugs.filter(drugs => {
-        //     //removing drugs that dont match
-        //     return drugs.name.toLowerCase().indexOf(filterText.toLowerCase()) !== -1;
-        // }).map(drugs => {
-        //     return (
-        //         <li className="list-group-item" key={drugs.id} >{drugs.name}<button className='btn btn-sm btn-success btn-drug' onClick={() => addDrug(drugs.id)}>Select</button></li>
-        //     )
-        // })
-
-        console.log(dataList);
+//         {
+//    "A": "NAZWA",
+//    "B": "POSTAC",
+//    "C": "DAWKA",
+//    "D": "OPAKOWANIE",
+//    "E": "PRODUCENT"
+//  },
 
         return (
             <div>

@@ -1,5 +1,7 @@
 import React from 'react';
+import leki from '../../data/leki.json';
 
+import uuid from 'uuid'
 
 export default  ({drugs, picked, deleteDrug, sendDrugs}) => {
     
@@ -7,11 +9,11 @@ export default  ({drugs, picked, deleteDrug, sendDrugs}) => {
 
     const pickedDrugs = picked.map(id => {
       // id = id-1;
-       console.log(id);
-        const name = drugs[id].name;
-        // console.log(name);
+      console.log(picked)
+        const name = id.a;
+     console.log(name);
         return(
-            <li onClick={()=>deleteDrug(id)} key={id}>{name}<button  className='btn'>Delete</button></li>
+            <li onClick={()=>deleteDrug(id)} key={uuid()}>{name} {id.b} {id.c}, {id.d} {id.c}<button  className='btn'>Delete</button></li>
         )
      }) 
     return(
