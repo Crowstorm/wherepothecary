@@ -47,7 +47,7 @@ class Gdziepteka extends Component {
       value = 5;
     } else if(value>100){
       value=20;
-      console.log('Załadowanie wiekszej ilosci lekow grozi błędem')
+      alert('Załadowanie wiekszej ilosci lekow grozi błędem. Przywracam domyslne 20')
     }
     this.setState({
       numberOfDrugs: value
