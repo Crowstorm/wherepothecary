@@ -6,14 +6,16 @@ class DrugsList extends React.Component {
     render() {
 
        //const { drugs, filterText, addDrug } = this.props;
-        const drugs = this.props.drugs;
+
         const filterText = this.props.filterText;
         const addDrug = this.props.addDrug;
+        const numberOfDrugs = this.props.numberOfDrugs
 
 
        const dataList = [];
        let skip = 0;
-       const max = 20;
+       //Ile lekow na stronie pobrane ze state
+       const max = numberOfDrugs;
        const filterLowerCase = filterText.toLowerCase(); // Do this *once*
        leki.some(function(entry) {
            if (entry.A.toLowerCase().indexOf(filterLowerCase) !== -1) {
@@ -36,6 +38,13 @@ class DrugsList extends React.Component {
 //    "D": "OPAKOWANIE",
 //    "E": "PRODUCENT"
 //  },
+
+
+        // const dataListRender = (numberOfDrugs) ? {dataList} : notRendered()
+
+        // function notRendered() {
+        //     return 'Not rendered yet'
+        // }
 
         return (
             <div>

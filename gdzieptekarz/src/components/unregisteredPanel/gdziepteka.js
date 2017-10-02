@@ -16,6 +16,7 @@ class Gdziepteka extends Component {
     super(props);
     this.state = {
       filterText: '',
+      numberOfDrugs: 20,
       picked: [
       ],
       lat: '',
@@ -38,6 +39,18 @@ class Gdziepteka extends Component {
   filterUpdate(value){
     this.setState({
       filterText: value
+    })
+  }
+
+  numberOfDrugs(value){
+    if(value==''){
+      value = 5;
+    } else if(value>100){
+      value=20;
+      console.log('Załadowanie wiekszej ilosci lekow grozi błędem')
+    }
+    this.setState({
+      numberOfDrugs: value
     })
   }
 
@@ -99,6 +112,7 @@ class Gdziepteka extends Component {
           <Search 
           filterText={this.state.filterText}
           filterUpdate={this.filterUpdate.bind(this)}
+          numberOfDrugs={this.numberOfDrugs.bind(this)}
           />
           <SelectedDrugs
           picked={this.state.picked}
@@ -110,6 +124,7 @@ class Gdziepteka extends Component {
           <DrugsList
           drugs={this.props.drugs} 
           filterText={this.state.filterText}
+          numberOfDrugs={this.state.numberOfDrugs}
           addDrug={this.addDrug.bind(this)}
           />
          
