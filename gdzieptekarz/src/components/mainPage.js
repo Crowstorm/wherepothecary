@@ -5,7 +5,7 @@ class MainPage extends React.Component{
         return(
             <div>
                 <h1>WHEREPOTHECARY</h1>
-                <div><a href='/signUp'>Sign up</a></div>
+                <div><a href='/login'>Login</a></div>
                 <div><a href='/forgottenPassword'>Forgot password?</a></div>
                 <div><a href='/register'>Not registered yet?</a></div>
                 <div><a href='/panel'>Panel Apteki</a></div>

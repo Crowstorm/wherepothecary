@@ -15,7 +15,7 @@ import fakePayload from './components/fakePayload/fakePayload'
 import drugs from './components/data/drugs'
 
 import MainPage from './components/mainPage'
-import SignUp from './components/signUp';
+import Login from './components/login';
 import ForgottenPassword from './components/forgottenPassword';
 import Register from './components/register';
 
@@ -33,7 +33,7 @@ class App extends Component {
         <BrowserRouter>
           <Switch>
             <Route path='/' component={MainPage} exact={true} />
-            <Route path='/signup' component={SignUp} exact={true} />
+            <Route path='/login' component={Login} exact={true} />
             <Route path='/forgottenPassword' component={ForgottenPassword} exact={true} />
             <Route path='/register' component={Register} exact={true} />
             <Route path='/panel' exact={true} render={(props) => (<WherepothecaryPanel drugs={drugs} apteki={apteki} fakePayload={fakePayload} />)} /> {/* WHY DOU */}

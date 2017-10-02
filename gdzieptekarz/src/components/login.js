@@ -1,13 +1,13 @@
 import React from 'react';
 
-class SignUp extends React.Component{
+class Login extends React.Component{
     render(){
         return(
             <div>
                 <h1>WHEREPOTHECARY</h1>
                 <form>
-                    <input type='text' placeholder='username' />
-                    <input type='text' placeholder='password' />
+                    <input type='text' label='username' />
+                    <input type='text' label='password' />
                     <button>Submit</button>
                 </form>
                 <div><a href='/forgottenPassword'>Forgot password?</a></div>
@@ -17,4 +17,4 @@ class SignUp extends React.Component{
     }
 }
 
-export default SignUp
+export default Login
