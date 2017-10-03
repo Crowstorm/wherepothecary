@@ -39,7 +39,7 @@ console.log(store.getState())
 
 const jsx = (
     <Provider store={store}>
-        <App />
+        <App {...this.props} />
     </Provider>
 )
 
