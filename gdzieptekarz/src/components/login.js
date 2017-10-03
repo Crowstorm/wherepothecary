@@ -10,13 +10,14 @@ import { login } from '../actions/auth'
 
 class LoginPage extends React.Component {
 
-    submit = (data) => {
-        console.log(data)
-        this.props.login(data).then(() => this.props.history.puh("/"))
-    }
+    // submit = (data) => {
+    //     console.log(data)
+    //     this.props.login(data).then(() => this.props.history.push("/"))
+    // }
+
+    submit = data => this.props.login(data).then(() => this.props.history.push("/"));
 
     
-
     render() {
         console.log(this.props)
         return (

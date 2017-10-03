@@ -42,5 +42,6 @@
     "json-loader": "^0.5.7"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "proxy": "http://localhost:8080"
 }

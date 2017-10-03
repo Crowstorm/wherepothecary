@@ -26,7 +26,9 @@ class LoginForm extends React.Component {
         this.setState({errors});
         //sprawdz jak w lodashu
         if(Object.keys(errors).length ===0){
-            this.props.submit(this.state.data);
+            this.setState({loading: true})
+            this.props.submit(this.state.data).catch(err => this.setState({ errors: err.response.data.errors, loading: false}))
+
         }
     }
 
@@ -45,11 +47,12 @@ class LoginForm extends React.Component {
     }
 
     render() {
-        const {data, errors} = this.state;
+        const {data, errors, loading} = this.state;
     
         return (
             <div>
-                <form onSubmit={this.onSubmit}>
+                <form onSubmit={this.onSubmit} >
+                    {errors.global && <div>{errors.global}</div>}
                     <input type='text' label='email' name='email' placeholder='email' value={data.email} onChange={this.onChange}/> <br />
                     {errors.email && <div>{errors.email}</div>}
                     <input type='text' label='password' name='password' placeholder='password' value={data.password} onChange={this.onChange}/> <br />
