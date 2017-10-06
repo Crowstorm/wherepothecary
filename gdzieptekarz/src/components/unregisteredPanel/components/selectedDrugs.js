@@ -1,5 +1,5 @@
 import React from 'react';
-
+import leki from '../../data/leki.json';
 
 import uuid from 'uuid'
 

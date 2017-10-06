@@ -30,10 +30,10 @@ console.log(store.getState())
 
 // store.dispatch(setPrice(45, {price: 370}));
 
-// setInterval(() =>{
-//     store.dispatch(setId(uuid(), uuid()));
-//     }
-//     , 7000)
+setInterval(() =>{
+    store.dispatch(setId(uuid(), uuid()));
+    }
+    , 7000)
 
 // console.log(store.getState())
 

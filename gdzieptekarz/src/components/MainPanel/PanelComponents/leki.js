@@ -60,8 +60,6 @@ class Leki extends React.Component {
             </tr>
             )
         }
-        // console.log(this.props.renderedDrugs)
-        
         return arrayOfDrugs;
     }
 

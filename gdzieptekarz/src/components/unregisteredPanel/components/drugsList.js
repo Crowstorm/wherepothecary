@@ -16,7 +16,7 @@ class DrugsList extends React.Component {
        let skip = 0;
        //Ile lekow na stronie pobrane ze state
        const max = numberOfDrugs;
-       const filterLowerCase = filterText.toLowerCase(); 
+       const filterLowerCase = filterText.toLowerCase(); // Do this *once*
        leki.some(function(entry) {
            if (entry.A.toLowerCase().indexOf(filterLowerCase) !== -1) {
                if (skip > 0) {
@@ -24,7 +24,7 @@ class DrugsList extends React.Component {
                } else {
                    dataList.push(<li className="list-group-item" key={uuid()} >{entry.A} {entry.B} {entry.C}, {entry.D} {entry.E}<button className='btn btn-sm btn-success btn-drug' onClick={() => addDrug(entry.A, entry.B,entry.C,entry.D,entry.E)}>Select</button></li>);
                    if (dataList.length == max) {
-                       return true; 
+                       return true; // Stop `some`, we have enough
                    }
                }
            }

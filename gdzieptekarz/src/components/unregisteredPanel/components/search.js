@@ -2,9 +2,8 @@ import React from 'react';
 
 class Search extends React.Component {
     filterUpdate() {
-        const searchValue = this.myVal.value;
+        const searchValue = this.myValue.value;
         this.props.filterUpdate(searchValue);
-        console.log(searchValue)
     }
 
     numberOfDrugs(){
@@ -17,15 +16,13 @@ class Search extends React.Component {
 
         return (
             <div>
-                <p>Type to search for products</p>
                 <form>
                     <input className='form-control' type='text'
-                        ref={(value) => { this.myVal = value }}
+                        ref={(value) => { this.myValue = value }}
                         placeholder='Type to search for products'
                         onChange={this.filterUpdate.bind(this)}>
                     </input>
                 </form>
-                <p>How many drugs are displayed on site</p>
                 <form>
                     <input className='form-control' type='number'
                         ref={(value) => { this.myValue = value }}
