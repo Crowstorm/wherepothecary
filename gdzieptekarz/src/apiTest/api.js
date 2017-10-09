@@ -26,11 +26,28 @@ router.post('/leki', function (req, res, next) {
 })
 
 router.put('/leki/:id', function (req, res, next) {
-    res.send({ type: 'PUT' })
+    Drug.findByIdAndUpdate({ _id: req.params.id }, req.body).then(function () {
+        Drug.findOne({ _id: req.params.id }).then(function (drug) {
+            res.send(drug);
+        })
+    })
+    //res.send({ type: 'PUT' })
 })
 
 router.delete('/leki/:id', function (req, res, next) {
-    res.send({ type: 'DELETE' })
+    //console.log(req.params.id);
+    Drug.findByIdAndRemove({ _id: req.params.id }).then(function (drug) {
+        res.send({ type: drug })
+    });
+    // res.send({ type: 'DELETE' })
 })
 
 module.exports = router;
+
+// {
+//     "A": "BEAUTY&YOUTHFORTE A+E",
+//     "B": "KAPS.",
+//     "C": "",
+//     "D": "30 KAPS.",
+//     "E": "STARPHARMA"
+//   }
