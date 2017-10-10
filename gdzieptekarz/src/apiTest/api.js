@@ -5,7 +5,14 @@ const router = express.Router();
 
 //get list of drugs
 router.get('/leki', function (req, res) {
-    res.send({ type: 'GET' })
+    //pobierz wszystkie leki w api
+    Drug.find({}).then(function(drugs){
+        //res.send(drugs);
+        res.json({data: drugs})
+    })
+
+    
+   // res.send({ type: 'GET' })
 })
 
 router.post('/leki', function (req, res, next) {
@@ -20,7 +27,7 @@ router.post('/leki', function (req, res, next) {
         //     opakowanie: req.body.D,
         //     producent: req.body.E
         // })
-        res.send(drug);
+        res.json({data: drug})
     }).catch(next);
 
 })
@@ -28,7 +35,7 @@ router.post('/leki', function (req, res, next) {
 router.put('/leki/:id', function (req, res, next) {
     Drug.findByIdAndUpdate({ _id: req.params.id }, req.body).then(function () {
         Drug.findOne({ _id: req.params.id }).then(function (drug) {
-            res.send(drug);
+            res.json({data: drug})
         })
     })
     //res.send({ type: 'PUT' })

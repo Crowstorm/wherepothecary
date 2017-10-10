@@ -9,6 +9,8 @@ const app = express();
 mongoose.connect('mongodb://localhost/drugDB');
 mongoose.Promise = global.Promise;
 
+//serving files (folder name)
+//app.use(express.static('../../../src'));
 
 app.use(bodyParser.json());
 
@@ -17,14 +19,9 @@ app.use('/api', routes);
 
 //error handling middleware
 app.use(function(err, req, res, next){
-    //console.log(err);
     res.send({error: err.message})
 })
 
-app.get('/api', function(req, res){
-    console.log('get');
-    res.status(422).send({name: "ibuprom"});
-})
 
 
 app.listen(process.env.port || 8080, function(){
