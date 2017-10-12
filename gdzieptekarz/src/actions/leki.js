@@ -7,10 +7,10 @@ export const setPrice = (id, cena) => ({
     cena
 })
 
-export function removeDrug(drugId){
+export function removeDrug(id){
     return {
         type: 'REMOVE_DRUG',
-        drugId
+        id
     }
 }
 

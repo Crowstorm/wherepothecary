@@ -27,8 +27,8 @@ const renderedDrugsReducer2 = (state = renderedDrugsReducerDefState2, action) =>
                 }
                 return drug; //musisz zwrocic niezmodyfikowane
             })
-        // case 'REMOVE_DRUG':
-        //      return state.filter(({ drugId }) => drugId !== action.drugId);
+         case 'REMOVE_DRUG':
+             return state.filter(({ id }) => id !== action.id);
 
         default:
             return state;

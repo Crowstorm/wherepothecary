@@ -60,7 +60,17 @@ class Leki extends React.Component {
 
         const handleRemoveDrug = (e) => {
             console.log('We dont have this drug PLACEHOLDER')
-            this.props.dispatch(sendRemoveFunction(this.props.renderedDrugs[e.target.id].drugId));
+
+            fetch('http://localhost:8080/api/leki/' + this.props.renderedDrugs2[e.target.id].id, {
+                method: 'DELETE',
+                headers: {
+                  'Accept': 'application/json, text/plain, */*',
+                  'Content-Type': 'application/json'
+                }
+              }).then(res => res.json())
+                .then(res => console.log(res));
+
+            this.props.dispatch(sendRemoveFunction(this.props.renderedDrugs2[e.target.id].id));
         }
 
         for (var i = 0; i < l; i++) {
