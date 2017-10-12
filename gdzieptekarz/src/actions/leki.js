@@ -27,7 +27,7 @@ export function setId(id, drugId, lat, lon) {
 }
 
 //api version
-export function setDrug(id, nazwa, postac, dawka, opakowanie, producent) {
+export function setDrug(id, nazwa, postac, dawka, opakowanie, producent, lat, lon) {
     return {
         type: 'SET_DRUG',
         renderedDrugs2: {
@@ -36,7 +36,9 @@ export function setDrug(id, nazwa, postac, dawka, opakowanie, producent) {
             postac,
             dawka,
             opakowanie,
-            producent
+            producent,
+            lat,
+            lon
         }
     }
 }
@@ -69,6 +71,6 @@ export function setPriceFunction(id,val){
 export function test(drug2){
     //console.log(drug);
     return (dispatch) => {
-        drug2.map( drug => dispatch(setDrug(drug._id, drug.A, drug.B, drug.C, drug.D, drug.E)))
+        drug2.map( drug => dispatch(setDrug(drug._id, drug.A, drug.B, drug.C, drug.D, drug.E, drug.lat, drug.lon)))
     }
 }

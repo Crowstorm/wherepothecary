@@ -85,7 +85,7 @@ class Leki extends React.Component {
                 <td><input value={this.props.renderedDrugs2[i].cena} onChange={handlePriceChange} type="number" name={this.props.renderedDrugs2[i].id} /></td>
                 <td><button id={i} onClick={handleSend}>Send</button></td>
                 <td><button id={i} onClick={handleRemoveDrug}>X</button></td>
-                {/* <td>{calculateDistance(this.props.renderedDrugs[i].lat, this.props.renderedDrugs[i].lon, this.props.apteka.latA, this.props.apteka.lonA).toFixed(1)} km </td> */}
+                <td>{calculateDistance(this.props.renderedDrugs2[i].lat, this.props.renderedDrugs2[i].lon, this.props.apteka.latA, this.props.apteka.lonA).toFixed(1)} km </td>
             </tr>
             )
         }

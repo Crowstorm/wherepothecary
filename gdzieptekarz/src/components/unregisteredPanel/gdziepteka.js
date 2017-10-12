@@ -97,7 +97,7 @@ class Gdziepteka extends Component {
     // console.log('Odleglosc do apteki wynosi: ', 'r', R, 'lata', latA, 'lat', lat,  'dlat', dLat, 'dlon' ,dLon, 'a', a, 'c', c,  'd', d);
 
     picked.forEach((lek) => {
-      console.log(lek.a, 'nazwa')
+      // console.log(lat, 'nazwa')
       fetch('http://localhost:8080/api/leki', {
         method: 'post',
         headers: {

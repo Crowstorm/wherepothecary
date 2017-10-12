@@ -5,7 +5,9 @@ const renderedDrugsReducerDefState2 = {
     dawka: undefined,
     opakowanie: undefined,
     producent: undefined,
-    cena: undefined
+    cena: undefined,
+    lat: undefined,
+    lon: undefined
 };
 
 const renderedDrugsReducer2 = (state = renderedDrugsReducerDefState2, action) => {
