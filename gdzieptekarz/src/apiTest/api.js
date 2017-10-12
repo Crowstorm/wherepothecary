@@ -7,8 +7,8 @@ const router = express.Router();
 router.get('/leki', function (req, res) {
     //pobierz wszystkie leki w api
     Drug.find({}).then(function(drugs){
-        //res.send(drugs);
-        res.json({data: drugs})
+        res.send(drugs);
+        //res.json({data: drugs})
     })
 
     

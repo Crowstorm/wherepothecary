@@ -30,30 +30,33 @@ class WherepothecaryPanel extends React.Component {
         })
       }
 
+    // Dziala tylko jesli dodam rozszerzenie https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en-US  do chrome'a. Bez tego nie dziala dopoki baza danych jest na moim PC
+
     // componentDidMount(){
     //     fetch('http://localhost:8080/api/leki').then(function(data){
-    //         console.log(data.json());
-    //     }).then(json =>{
-    //         console.log(json);
+    //         //console.log(data.json());
+    //         return data.json();
+    //     }).then(function(data){
+    //         console.log(data.data[1]);
     //     })
     // }
 
-    // Dziala tylko jesli dodam rozszerzenie https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en-US  do chrome'a. Bez tego nie dziala dopoki baza danych jest na moim PC
+    //tez dziala
 
-    componentDidMount(){
-        fetch('http://localhost:8080/api/leki', {
-          method: 'GET',
-          headers: {       
-               'Accept': 'application/json',
-                credentials: 'same-origin'
-           }
-        }).then(function(response){
-           // console.log(response.json())
-            return response.json();
-        }).then(function(data) {
-          console.log(data.data[0])
-        })
-    }
+    // componentDidMount(){
+    //     fetch('http://localhost:8080/api/leki', {
+    //       method: 'GET',
+    //       headers: {       
+    //            'Accept': 'application/json',
+    //             credentials: 'same-origin'
+    //        }
+    //     }).then(function(response){
+    //        // console.log(response.json())
+    //         return response.json();
+    //     }).then(function(data) {
+    //       console.log(data.data[0])
+    //     })
+    // }
 
     render() {
 

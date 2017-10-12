@@ -1,29 +1,41 @@
 import React from 'react';
 import { connect } from 'react-redux'
 //import { bindActionCreators } from 'redux'
-import { drugMapper, setPriceFunction, sendRemoveFunction } from '../../../actions/leki'
+import { drugMapper, setPriceFunction, sendRemoveFunction, test } from '../../../actions/leki'
 
 //import _ from 'lodash';
 
 
 class Leki extends React.Component {
     componentWillMount() {
-        const { fakePayload, drugs} = this.props;
+        const { fakePayload, drugs } = this.props;
 
-        this.props.dispatch(drugMapper(drugs, fakePayload))
+        const leki = fetch('http://localhost:8080/api/leki').then(function (data) {
+            return data.json();
+            //console.log(data.json());
+        }).then((data) => {
+            //return data.data;
+            // data.forEach((drug) => {
+            //     console.log(drug);
+            //    this.props.dispatch(test(drug));
+            // })
+            this.props.dispatch(test(data))
+        })
+
+        //this.props.dispatch(drugMapper(drugs, fakePayload))
     }
 
-    // getDrugs() {
-    //     return data = _.get(this.props, 'renderedDrugs[0].drugId');
-    // }
 
     getDrugs() {
-        const l = this.props.renderedDrugs.length;
+        const l = this.props.renderedDrugs2.length;
+
+        console.log(this.props.renderedDrugs2, "asfdsf")
+
         const arrayOfDrugs = [];
 
         const calculateDistance = (latU, lonU, latA, lonA) => {
             var R = 6371; // Radius of the earth in km
-            var dLat = (latA - latU) * (Math.PI / 180); 
+            var dLat = (latA - latU) * (Math.PI / 180);
             var dLon = (lonA - lonU) * (Math.PI / 180);
             var a =
                 Math.sin(dLat / 2) * Math.sin(dLat / 2) +
@@ -35,13 +47,13 @@ class Leki extends React.Component {
             return d;
         }
 
-        const handlePriceChange = (e) =>{
+        const handlePriceChange = (e) => {
             return this.props.dispatch(setPriceFunction(e.target.name, e.target.value));
         }
 
         const handleSend = (e) => {
             this.props.dispatch(sendRemoveFunction(this.props.renderedDrugs[e.target.id].drugId))
-            console.log(e.target.id, 'Wysylam lek o id ',this.props.renderedDrugs[e.target.id].id, ' ktory koztuje ', this.props.renderedDrugs[e.target.id].price )
+            console.log(e.target.id, 'Wysylam lek o id ', this.props.renderedDrugs[e.target.id].id, ' ktory koztuje ', this.props.renderedDrugs[e.target.id].price)
         }
 
         const handleRemoveDrug = (e) => {
@@ -49,24 +61,38 @@ class Leki extends React.Component {
             this.props.dispatch(sendRemoveFunction(this.props.renderedDrugs[e.target.id].drugId));
         }
 
+
+        // for (var i = 0; i < l; i++) {
+        //     arrayOfDrugs.push(<tr key={this.props.renderedDrugs[i].id}>
+        //         <td>{this.props.renderedDrugs[i].id}</td>
+        //         <td>{this.props.renderedDrugs[i].name}</td>
+        //         <td><input value={this.props.renderedDrugs[i].price} onChange={handlePriceChange} type="number" name={this.props.renderedDrugs[i].drugId} /></td>
+        //         <td><button id={i} onClick={handleSend}>Send</button></td>
+        //         <td><button id={i} onClick={handleRemoveDrug}>X</button></td>
+        //         <td>{calculateDistance(this.props.renderedDrugs[i].lat, this.props.renderedDrugs[i].lon, this.props.apteka.latA, this.props.apteka.lonA).toFixed(1)} km </td>
+        //     </tr>
+        //     )
+        // }
+
         for (var i = 0; i < l; i++) {
-            arrayOfDrugs.push(<tr key={this.props.renderedDrugs[i].id}>
-                <td>{this.props.renderedDrugs[i].id}</td>
-                <td>{this.props.renderedDrugs[i].name}</td>
-                <td><input value={this.props.renderedDrugs[i].price} onChange={handlePriceChange} type="number" name={this.props.renderedDrugs[i].drugId} /></td>
+            console.log('dziala?')
+            arrayOfDrugs.push(<tr key={this.props.renderedDrugs2[i].id}>
+                <td>{this.props.renderedDrugs2[i].id}</td>
+                <td>{this.props.renderedDrugs2[i].nazwa}</td>
+                {/* <td><input value={this.props.renderedDrugs[i].price} onChange={handlePriceChange} type="number" name={this.props.renderedDrugs[i].drugId} /></td>
                 <td><button id={i} onClick={handleSend}>Send</button></td>
                 <td><button id={i} onClick={handleRemoveDrug}>X</button></td>
-                <td>{calculateDistance(this.props.renderedDrugs[i].lat, this.props.renderedDrugs[i].lon, this.props.apteka.latA, this.props.apteka.lonA).toFixed(1)} km </td>
+                <td>{calculateDistance(this.props.renderedDrugs[i].lat, this.props.renderedDrugs[i].lon, this.props.apteka.latA, this.props.apteka.lonA).toFixed(1)} km </td> */}
             </tr>
             )
         }
         // console.log(this.props.renderedDrugs)
-        
+
         return arrayOfDrugs;
     }
 
     render() {
-        const tableOfDrugsRender = (this.props.renderedDrugs) ? this.getDrugs() : notRendered()
+        const tableOfDrugsRender = (this.props.renderedDrugs2) ? this.getDrugs() : notRendered()
 
         function notRendered() {
             return 'Not rendered yet'
@@ -99,7 +125,8 @@ class Leki extends React.Component {
 const mapStateToProps = (state) => {
     return {
         apteka: state.apteka,
-        renderedDrugs: state.renderedDrugs
+        renderedDrugs: state.renderedDrugs,
+        renderedDrugs2: state.renderedDrugs2
     }
 }
 

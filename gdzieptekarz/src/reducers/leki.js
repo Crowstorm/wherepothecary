@@ -8,6 +8,8 @@ const renderedDrugsReducerDefState = {
     price: undefined
 };
 
+
+
 const renderedDrugsReducer = (state = renderedDrugsReducerDefState, action) => {
     switch (action.type) {
         case 'SET_ID':
