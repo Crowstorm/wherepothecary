@@ -15,16 +15,16 @@ const renderedDrugsReducer2 = (state = renderedDrugsReducerDefState2, action) =>
                 ...state,
                 action.renderedDrugs2
             ]
-        // case 'SET_PRICE':
-        //     return state.map((drug) => {
-        //         if (drug.drugId == action.drugId) {
-        //             return {
-        //                 ...drug,
-        //                 ...action.price
-        //             }
-        //         }
-        //         return drug; //musisz zwrocic niezmodyfikowane
-        //     })
+        case 'SET_PRICE':
+            return state.map((drug) => {
+                if (drug.id == action.id) {
+                    return {
+                        ...drug,
+                        ...action.cena
+                    }
+                }
+                return drug; //musisz zwrocic niezmodyfikowane
+            })
         // case 'REMOVE_DRUG':
         //      return state.filter(({ drugId }) => drugId !== action.drugId);
 

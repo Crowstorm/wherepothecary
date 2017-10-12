@@ -52,8 +52,8 @@ class Leki extends React.Component {
         }
 
         const handleSend = (e) => {
-            this.props.dispatch(sendRemoveFunction(this.props.renderedDrugs[e.target.id].drugId))
-            console.log(e.target.id, 'Wysylam lek o id ', this.props.renderedDrugs[e.target.id].id, ' ktory koztuje ', this.props.renderedDrugs[e.target.id].price)
+           // this.props.dispatch(sendRemoveFunction(this.props.renderedDrugs[e.target.id].drugId))
+            console.log(e.target.id, 'Wysylam lek o id ', this.props.renderedDrugs2[e.target.id].id, ' ktory koztuje ', this.props.renderedDrugs2[e.target.id].cena)
         }
 
         const handleRemoveDrug = (e) => {
@@ -77,12 +77,15 @@ class Leki extends React.Component {
         for (var i = 0; i < l; i++) {
             console.log('dziala?')
             arrayOfDrugs.push(<tr key={this.props.renderedDrugs2[i].id}>
-                <td>{this.props.renderedDrugs2[i].id}</td>
                 <td>{this.props.renderedDrugs2[i].nazwa}</td>
-                {/* <td><input value={this.props.renderedDrugs[i].price} onChange={handlePriceChange} type="number" name={this.props.renderedDrugs[i].drugId} /></td>
+                <td>{this.props.renderedDrugs2[i].postac}</td>
+                <td>{this.props.renderedDrugs2[i].dawka}</td>
+                <td>{this.props.renderedDrugs2[i].opakowanie}</td>
+                <td>{this.props.renderedDrugs2[i].producent}</td>
+                <td><input value={this.props.renderedDrugs2[i].cena} onChange={handlePriceChange} type="number" name={this.props.renderedDrugs2[i].id} /></td>
                 <td><button id={i} onClick={handleSend}>Send</button></td>
                 <td><button id={i} onClick={handleRemoveDrug}>X</button></td>
-                <td>{calculateDistance(this.props.renderedDrugs[i].lat, this.props.renderedDrugs[i].lon, this.props.apteka.latA, this.props.apteka.lonA).toFixed(1)} km </td> */}
+                {/* <td>{calculateDistance(this.props.renderedDrugs[i].lat, this.props.renderedDrugs[i].lon, this.props.apteka.latA, this.props.apteka.lonA).toFixed(1)} km </td> */}
             </tr>
             )
         }
@@ -125,7 +128,7 @@ class Leki extends React.Component {
 const mapStateToProps = (state) => {
     return {
         apteka: state.apteka,
-        renderedDrugs: state.renderedDrugs,
+       // renderedDrugs: state.renderedDrugs,
         renderedDrugs2: state.renderedDrugs2
     }
 }

@@ -79,8 +79,12 @@ class WherepothecaryPanel extends React.Component {
                 <table id='wherepothecaryPanel' >
                     <tbody>
                         <tr>
-                            <td>ID Leku</td>
+                            {/* <td>ID Leku</td> */}
                             <td>Nazwa</td>
+                            <td>Postać</td>
+                            <td>Dawka</td>
+                            <td>Opakowanie</td>
+                            <td>Producent</td>
                             <td>Cena (zł)</td>
                             <td>Wyślij</td>
                             <td>Usuń</td>

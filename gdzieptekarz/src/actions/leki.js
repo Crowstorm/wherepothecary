@@ -1,10 +1,10 @@
 import uuid from 'uuid';
 
 //SET_PRICE
-export const setPrice = (drugId, price) => ({
+export const setPrice = (id, cena) => ({
     type: 'SET_PRICE',
-    drugId,
-    price
+    id,
+    cena
 })
 
 export function removeDrug(drugId){
@@ -59,9 +59,9 @@ export function drugMapper(drugs, fakePayload) {
 }
 
 export function setPriceFunction(id,val){
-    //console.log(val)
+    console.log(val)
     return (dispatch) => {
-        dispatch(setPrice(id, {price: val}))
+        dispatch(setPrice(id, {cena: val}))
     }
 }
 

@@ -8,7 +8,9 @@ const drugSchema = new Schema({
     C: {type: String}, //DAWKA
     D: {type: String}, //OPAKOWANIE
     E: {type: String}, //PRODUCENT
-    price: {type: Number}
+    price: {type: Number},
+    lat: {type: Number},
+    lon: {type: Number}
     //byc moze coordynaty usera / apteki i dostepnosc
 });
 

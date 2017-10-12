@@ -27,7 +27,8 @@ router.post('/leki', function (req, res, next) {
         //     opakowanie: req.body.D,
         //     producent: req.body.E
         // })
-        res.json({data: drug})
+        //res.json({data: drug})
+        res.send(drugs);
     }).catch(next);
 
 })
@@ -35,7 +36,8 @@ router.post('/leki', function (req, res, next) {
 router.put('/leki/:id', function (req, res, next) {
     Drug.findByIdAndUpdate({ _id: req.params.id }, req.body).then(function () {
         Drug.findOne({ _id: req.params.id }).then(function (drug) {
-            res.json({data: drug})
+            //res.json({data: drug})
+            res.send(drugs);
         })
     })
     //res.send({ type: 'PUT' })
