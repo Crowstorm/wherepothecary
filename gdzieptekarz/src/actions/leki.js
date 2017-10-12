@@ -49,16 +49,16 @@ export function sendRemoveFunction(drugId){
     }
 }
 
-export function drugMapper(drugs, fakePayload) {
-    const rngPayloadId = Math.floor(Math.random() * 4);
-    return (dispatch) => {
-        const payload = fakePayload.map((payload) => {
-            if (payload.payloadId === rngPayloadId) {
-                return payload.drugsId.map(id => { dispatch(setId(uuid(), id, payload.lat, payload.lon)) })
-            }
-        })
-    }
-}
+// export function drugMapper(drugs, fakePayload) {
+//     const rngPayloadId = Math.floor(Math.random() * 4);
+//     return (dispatch) => {
+//         const payload = fakePayload.map((payload) => {
+//             if (payload.payloadId === rngPayloadId) {
+//                 return payload.drugsId.map(id => { dispatch(setId(uuid(), id, payload.lat, payload.lon)) })
+//             }
+//         })
+//     }
+// }
 
 export function setPriceFunction(id,val){
     console.log(val)

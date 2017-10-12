@@ -12,17 +12,9 @@ class Leki extends React.Component {
 
         const leki = fetch('http://localhost:8080/api/leki').then(function (data) {
             return data.json();
-            //console.log(data.json());
         }).then((data) => {
-            //return data.data;
-            // data.forEach((drug) => {
-            //     console.log(drug);
-            //    this.props.dispatch(test(drug));
-            // })
             this.props.dispatch(test(data))
         })
-
-        //this.props.dispatch(drugMapper(drugs, fakePayload))
     }
 
 
@@ -53,6 +45,16 @@ class Leki extends React.Component {
 
         const handleSend = (e) => {
            // this.props.dispatch(sendRemoveFunction(this.props.renderedDrugs[e.target.id].drugId))
+           fetch('http://localhost:8080/api/leki/' + this.props.renderedDrugs2[e.target.id].id, {
+            method: 'PUT',
+            headers: {
+              'Accept': 'application/json, text/plain, */*',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ price: this.props.renderedDrugs2[e.target.id].cena })
+          }).then(res => res.json())
+            .then(res => console.log(res));
+
             console.log(e.target.id, 'Wysylam lek o id ', this.props.renderedDrugs2[e.target.id].id, ' ktory koztuje ', this.props.renderedDrugs2[e.target.id].cena)
         }
 
@@ -60,19 +62,6 @@ class Leki extends React.Component {
             console.log('We dont have this drug PLACEHOLDER')
             this.props.dispatch(sendRemoveFunction(this.props.renderedDrugs[e.target.id].drugId));
         }
-
-
-        // for (var i = 0; i < l; i++) {
-        //     arrayOfDrugs.push(<tr key={this.props.renderedDrugs[i].id}>
-        //         <td>{this.props.renderedDrugs[i].id}</td>
-        //         <td>{this.props.renderedDrugs[i].name}</td>
-        //         <td><input value={this.props.renderedDrugs[i].price} onChange={handlePriceChange} type="number" name={this.props.renderedDrugs[i].drugId} /></td>
-        //         <td><button id={i} onClick={handleSend}>Send</button></td>
-        //         <td><button id={i} onClick={handleRemoveDrug}>X</button></td>
-        //         <td>{calculateDistance(this.props.renderedDrugs[i].lat, this.props.renderedDrugs[i].lon, this.props.apteka.latA, this.props.apteka.lonA).toFixed(1)} km </td>
-        //     </tr>
-        //     )
-        // }
 
         for (var i = 0; i < l; i++) {
             console.log('dziala?')
