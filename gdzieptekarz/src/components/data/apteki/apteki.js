@@ -37,7 +37,7 @@ export default [
     },
     {id:5,
         name: 'Jak Ryba',
-        address: 'Wypizdów 196',
+        address: 'Mariana 196',
         lat: 57.847509,
         lon: 17.759034,
         city: 'Łódź'

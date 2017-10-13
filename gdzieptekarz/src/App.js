@@ -8,7 +8,6 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Gdziepteka from './components/unregisteredPanel/gdziepteka'
 
 import apteki from './components/data/apteki/apteki'
- import drugs from './components/data/drugs'
 
 import MainPage from './components/mainPage'
 import Login from './components/login';

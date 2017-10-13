@@ -1,6 +1,8 @@
 
 import React from 'react';
 import GoogleMapsLoader from 'google-maps';
+
+//MOJ KLUCZ DO API, DO WYMIANY POZNIEJ BO MOGA ZBANOWAC JAK ZA DUZY RUCH
 GoogleMapsLoader.KEY = 'AIzaSyBHek4tQK4jSQhVSoxw4s4c8tz_1z3xuNI';
 
 
@@ -10,7 +12,6 @@ class GoogleMap extends React.Component {
 
   constructor(props) {
     super(props);
-    //const getCoords = this.props.getCoords;
     this.handleLocationError = this.handleLocationError.bind(this);
     this.state = {
       lat: '',
@@ -89,6 +90,7 @@ class GoogleMap extends React.Component {
       // Browser doesn't support Geolocation
       this.handleLocationError(false, map.getCenter());
     }
+
     console.log('DID MOUNT');
     console.log(this);
     console.log(this.state);

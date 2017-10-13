@@ -5,8 +5,6 @@ import uuid from 'uuid'
 class DrugsList extends React.Component {
     render() {
 
-       //const { drugs, filterText, addDrug } = this.props;
-
         const filterText = this.props.filterText;
         const addDrug = this.props.addDrug;
         const numberOfDrugs = this.props.numberOfDrugs
@@ -31,25 +29,9 @@ class DrugsList extends React.Component {
            return false;
        });
 
-//         {
-//    "A": "NAZWA",
-//    "B": "POSTAC",
-//    "C": "DAWKA",
-//    "D": "OPAKOWANIE",
-//    "E": "PRODUCENT"
-//  },
-
-
-        // const dataListRender = (numberOfDrugs) ? {dataList} : notRendered()
-
-        // function notRendered() {
-        //     return 'Not rendered yet'
-        // }
-
         return (
             <div>
                 <ul className='list-group'>
-                    {/* {drugsList} */}
                     {dataList}
                 </ul>
             </div>

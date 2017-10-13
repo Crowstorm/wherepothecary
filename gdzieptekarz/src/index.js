@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import uuid from 'uuid'
 
 import { Provider } from 'react-redux'
 
@@ -9,7 +8,6 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 import { setLat, setLon } from './actions/apteka'
-import { setId } from './actions/leki'
 
 import configureStore from './store/configureStore' //STORE
 

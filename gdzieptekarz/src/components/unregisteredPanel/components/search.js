@@ -1,16 +1,17 @@
 import React from 'react';
 
 class Search extends React.Component {
+    //FILTR WYSZUKIWARKI
     filterUpdate() {
         const searchValue = this.myVal.value;
         this.props.filterUpdate(searchValue);
         console.log(searchValue)
     }
 
+    //FILTR LICZBY LEKOW NA STRONIE
     numberOfDrugs(){
         const drugNumber = this.myValue.value;
         this.props.numberOfDrugs(drugNumber);
-        console.log(drugNumber)
     }
 
     render() {

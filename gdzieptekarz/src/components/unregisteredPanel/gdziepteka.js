@@ -5,10 +5,6 @@ import Logo from './components/logo';
 import Search from './components/search'
 import SelectedDrugs from './components/selectedDrugs'
 import GoogleMap from './components/map';
-//import {BrowserRouter, Route} from 'react-router-dom'
-//bootstrap
-//import { Navbar, Jumbotron, Button } from 'react-bootstrap';
-
 
 
 class Gdziepteka extends Component {
@@ -24,11 +20,11 @@ class Gdziepteka extends Component {
       //Current Lat: 51.799 Current Lng: 19.456  tymczasowe koordy pseudoapteki
       latA: 51.799,
       lonA: 19.456,
-      count: 0,
       pickedDrugs: []
     }
   }
 
+  //USTAWIA COORDY DO STATE
   getCoords(lati, longi) {
     this.setState({
       lat: lati,
@@ -36,12 +32,14 @@ class Gdziepteka extends Component {
     })
   }
 
+  //FILTR WYSZUKIWARKI LEKOW
   filterUpdate(value) {
     this.setState({
       filterText: value
     })
   }
 
+  //ILOSC LEKOW NA STRONIE
   numberOfDrugs(value) {
     if (value == '') {
       value = 5;
@@ -54,50 +52,51 @@ class Gdziepteka extends Component {
     })
   }
 
+  //DODANIE LEKOW DO LISTY DO WYSLANIA DO APTEKI
   addDrug(a, b, c, d, e) {
-    //const {picked} = this.state;
-    console.log('adding id', a);
     const pickedDrugList = this.state.picked.concat([{ a, b, c, d, e }]);
     this.setState({
       picked: pickedDrugList
     })
   }
 
-
+  //USUNIECIE NIECHCIANEGO LEKU Z LISTY DO WYSLANIA
   deleteDrug(id) {
-    //const {count} = this.state
     const { picked } = this.state;
-    console.log('kliniety id to', id)
+ 
     var index = picked.indexOf(id);
-    console.log('index to', index);
+
     const newDrugs = [
       ...picked.slice(0, index),
       ...picked.slice(index + 1)
     ]
+
     this.setState({
       picked: newDrugs
     })
-    console.log('usuwam id', id, 'nowa tablica new drugs', { newDrugs })
   }
 
 
+  //WYSLANIE LEKOW DO API
   sendDrugs() {
     const { picked, lat, lon, latA, lonA } = this.state;
 
-    var R = 6371; // Radius of the earth in km
-    var dLat = (latA - lat) * (Math.PI / 180);  // deg2rad below
-    var dLon = (lonA - lon) * (Math.PI / 180);
-    var a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos((Math.PI / 180) * (lat)) * Math.cos((Math.PI / 180) * (latA)) *
-      Math.sin(dLon / 2) * Math.sin(dLon / 2)
-      ;
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    var d = R * c; // Distance in km
-    // console.log('Odleglosc do apteki wynosi: ', 'r', R, 'lata', latA, 'lat', lat,  'dlat', dLat, 'dlon' ,dLon, 'a', a, 'c', c,  'd', d);
+    //ZOSTAWIE ZAKOMENTOWANE JAKBY BYLO POTRZEBNE
 
+    // var R = 6371; // Radius of the earth in km
+    // var dLat = (latA - lat) * (Math.PI / 180);  // deg2rad below
+    // var dLon = (lonA - lon) * (Math.PI / 180);
+    // var a =
+    //   Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    //   Math.cos((Math.PI / 180) * (lat)) * Math.cos((Math.PI / 180) * (latA)) *
+    //   Math.sin(dLon / 2) * Math.sin(dLon / 2)
+    //   ;
+    // var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    // var d = R * c; // Distance in km
+
+
+    //WYSYLANIE LEKU DO API
     picked.forEach((lek) => {
-      // console.log(lat, 'nazwa')
       fetch('http://localhost:8080/api/leki', {
         method: 'post',
         headers: {
@@ -110,8 +109,7 @@ class Gdziepteka extends Component {
 
     })
 
-
-    console.log('Wysylam leki o id: ', { picked }, 'Coordynaty uzytkownika: ', { lat }, '{}', { lon }, ' Odleglosc do domyslnej apteki wynosi ', d.toFixed(1), 'km')
+    //zerowanie listy
     this.setState({
       picked: []
     })
@@ -131,13 +129,11 @@ class Gdziepteka extends Component {
           />
           <SelectedDrugs
             picked={this.state.picked}
-            drugs={this.props.drugs}
             deleteDrug={this.deleteDrug.bind(this)}
             sendDrugs={this.sendDrugs.bind(this)}
           />
 
           <DrugsList
-            drugs={this.props.drugs}
             filterText={this.state.filterText}
             numberOfDrugs={this.state.numberOfDrugs}
             addDrug={this.addDrug.bind(this)}

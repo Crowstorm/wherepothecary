@@ -11,7 +11,7 @@ const drugSchema = new Schema({
     price: {type: Number},
     lat: {type: Number},
     lon: {type: Number}
-    //byc moze coordynaty usera / apteki i dostepnosc
+    //byc moze dodaj bool dostepnosc i bool zmodyfikowany (zeby apteka nie dostawala ciagle tego samego po dodaniu ceny)
 });
 
 const Drug = mongoose.model("drug", drugSchema);
