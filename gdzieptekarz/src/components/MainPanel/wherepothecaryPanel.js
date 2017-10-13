@@ -1,5 +1,4 @@
 import React from 'react';
-//import Price from './PanelComponents/price'
 import { combineReducers } from 'redux';
 import Leki from './PanelComponents/leki'
 import AptekaRNG from './PanelComponents/aptekaRNG'
@@ -10,66 +9,21 @@ import drugs from '../../components/data/drugs'
 class WherepothecaryPanel extends React.Component {
     constructor(props){
         super(props);
-        this.state = {
-            apiDrugs: [
-                {
-                    id: '',
-                    drugId: '',
-                    price: ''
-                }
-            ]
-        }
     }
 
-    addApiDrug(id, drugId){
-        //const {picked} = this.state;
-        console.log('adding id', id);
-        const apiDrugList = this.state.rendered.concat([id, drugId]);
-        this.setState({
-          rendered: apiDrugList
-        })
-      }
 
     // Dziala tylko jesli dodam rozszerzenie https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en-US  do chrome'a. Bez tego nie dziala dopoki baza danych jest na moim PC
 
-    // componentDidMount(){
-    //     fetch('http://localhost:8080/api/leki').then(function(data){
-    //         //console.log(data.json());
-    //         return data.json();
-    //     }).then(function(data){
-    //         console.log(data.data[1]);
-    //     })
-    // }
-
-    //tez dziala
-
-    // componentDidMount(){
-    //     fetch('http://localhost:8080/api/leki', {
-    //       method: 'GET',
-    //       headers: {       
-    //            'Accept': 'application/json',
-    //             credentials: 'same-origin'
-    //        }
-    //     }).then(function(response){
-    //        // console.log(response.json())
-    //         return response.json();
-    //     }).then(function(data) {
-    //       console.log(data.data[0])
-    //     })
-    // }
 
     render() {
 
         const apteki = this.props.apteki;
-
-
 
         return (
             <div>
                 <div id='tymczasowe' className='col-xs-4'>
                     <p>Wylosowana apteka: </p>
                     <div>
-                        {/* {listaAptek} */}
                         <AptekaRNG apteki={apteki}/>
                     </div>
                 </div>
@@ -79,7 +33,6 @@ class WherepothecaryPanel extends React.Component {
                 <table id='wherepothecaryPanel' >
                     <tbody>
                         <tr>
-                            {/* <td>ID Leku</td> */}
                             <td>Nazwa</td>
                             <td>Postać</td>
                             <td>Dawka</td>

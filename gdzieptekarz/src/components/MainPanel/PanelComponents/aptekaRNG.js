@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { setLat, setLon, setName } from '../../../actions/apteka'
 
 
+//USUNALEM LOSOWANIE MIEDZY 4 APTEKAMI, USTAWILEM 1 DOMYSLNA. COMPONENT DO USUNIECIA PO DODANIU REJESTRACJI
 class AptekaRNG extends React.Component {
     constructor(props) {
         super(props)

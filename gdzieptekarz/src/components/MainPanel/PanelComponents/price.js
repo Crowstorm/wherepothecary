@@ -1,5 +1,6 @@
 import React from 'react'
 
+//USTAWIENIE CENY
 export default class Price extends React.Component{
     constructor(props){
         super(props);

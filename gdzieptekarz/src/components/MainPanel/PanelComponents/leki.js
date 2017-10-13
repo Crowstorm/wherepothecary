@@ -1,30 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux'
-//import { bindActionCreators } from 'redux'
-import { drugMapper, setPriceFunction, sendRemoveFunction, test } from '../../../actions/leki'
+import {  setPriceFunction, sendRemoveFunction, setApiDrug } from '../../../actions/leki'
 
-//import _ from 'lodash';
 
 
 class Leki extends React.Component {
     componentWillMount() {
-        const { fakePayload, drugs } = this.props;
-
-        const leki = fetch('http://localhost:8080/api/leki').then(function (data) {
+        //POBRANIE WSZYSTKICH LEKOW Z API I DODANIE ICH DO STORE
+        fetch('http://localhost:8080/api/leki').then(function (data) {
             return data.json();
         }).then((data) => {
-            this.props.dispatch(test(data))
+            this.props.dispatch(setApiDrug(data))
         })
     }
 
 
     getDrugs() {
-        const l = this.props.renderedDrugs2.length;
-
-        console.log(this.props.renderedDrugs2, "asfdsf")
+        //DLUGOSC TABLICY Z LEKAMI
+        const length = this.props.renderedDrugs2.length;
 
         const arrayOfDrugs = [];
 
+        //OBLICZANIE DYSTANSU MIEDZY APTEKA A UZYTKOWNIKIEM
         const calculateDistance = (latU, lonU, latA, lonA) => {
             var R = 6371; // Radius of the earth in km
             var dLat = (latA - latU) * (Math.PI / 180);
@@ -38,13 +35,14 @@ class Leki extends React.Component {
             var d = R * c; // Distance in km
             return d;
         }
-
+        
+        //USTAWIENIE CENY LEKU I DODANIE CENY DO STORE
         const handlePriceChange = (e) => {
             return this.props.dispatch(setPriceFunction(e.target.name, e.target.value));
         }
 
+        //AKTUALIZACJA LEKU W API O CENE
         const handleSend = (e) => {
-           // this.props.dispatch(sendRemoveFunction(this.props.renderedDrugs[e.target.id].drugId))
            fetch('http://localhost:8080/api/leki/' + this.props.renderedDrugs2[e.target.id].id, {
             method: 'PUT',
             headers: {
@@ -58,6 +56,9 @@ class Leki extends React.Component {
             console.log(e.target.id, 'Wysylam lek o id ', this.props.renderedDrugs2[e.target.id].id, ' ktory koztuje ', this.props.renderedDrugs2[e.target.id].cena)
         }
 
+
+        //USUNIECIE LEKU Z API
+        //Rozwiazanie tymczasowe, na te chwile znaczy, ze user nie odbierze zadnej informacji
         const handleRemoveDrug = (e) => {
             console.log('We dont have this drug PLACEHOLDER')
 
@@ -73,8 +74,8 @@ class Leki extends React.Component {
             this.props.dispatch(sendRemoveFunction(this.props.renderedDrugs2[e.target.id].id));
         }
 
-        for (var i = 0; i < l; i++) {
-            console.log('dziala?')
+        //RENDER WSZYSTKICH LEKOW W API DO TABELI W INTERFEJSIE
+        for (var i = 0; i < length; i++) {
             arrayOfDrugs.push(<tr key={this.props.renderedDrugs2[i].id}>
                 <td>{this.props.renderedDrugs2[i].nazwa}</td>
                 <td>{this.props.renderedDrugs2[i].postac}</td>
@@ -88,12 +89,11 @@ class Leki extends React.Component {
             </tr>
             )
         }
-        // console.log(this.props.renderedDrugs)
-
         return arrayOfDrugs;
     }
 
     render() {
+        //CZEKANIE NA ZALADOWANIE
         const tableOfDrugsRender = (this.props.renderedDrugs2) ? this.getDrugs() : notRendered()
 
         function notRendered() {
@@ -105,29 +105,10 @@ class Leki extends React.Component {
     }
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//     getDrugs: () => {
-//         dispatch(getDrugs())
-//     },
-//     setId2: (id, id) => {
-//         dispatch(setId(id, id))
-//     },
-//     setId3: (id, id) => {
-//         dispatch(setId(id, id))
-//     },
-//     setId4: (id, id) => {
-//         dispatch(setId(id, id))
-//     }
-// }
-
-// const mapDispatchToProps = (dispatch) => {
-//     return bindActionCreators({setId, test}, dispatch)
-// }
 
 const mapStateToProps = (state) => {
     return {
         apteka: state.apteka,
-       // renderedDrugs: state.renderedDrugs,
         renderedDrugs2: state.renderedDrugs2
     }
 }
